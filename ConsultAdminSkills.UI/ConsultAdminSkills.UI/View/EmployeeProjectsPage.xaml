@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ConsultAdminSkills.UI.View.EmployeeProjectsPage">
+
+  <ContentPage.Content>
+    <Label>Hej igen igen</Label>
+    <!--<ScrollView>
+      <Grid Padding="10">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="2*" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="1" Text="Projects" HorizontalOptions="Center" />
+        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="Här visas employees projekt. Om jag t.ex. valt Kalle i employee list och kikar på hans project-flik listas hans projekt här, ej editläge." />
+        --><!--BindingContext="{Binding Projects}"--><!--
+      </Grid>
+    </ScrollView>-->
+
+  </ContentPage.Content>
+  
+</ContentPage>
