@@ -32,12 +32,6 @@ namespace ConsultAdminSkills.UI.View
             var itemClicked = e.Item;
         }
 
-        private void SubAreaList_OnItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            if (e == null) return;
-            var itemClicked = e.Item;
-        }
-
         private void ToolbarItem_Edit(object sender, EventArgs e)
         {
             //Device.BeginInvokeOnMainThread(() => Navigation.PushAsync(new EmployeeGeneralEditPage(_Navigation)));
@@ -46,25 +40,26 @@ namespace ConsultAdminSkills.UI.View
         {
             var eventArgsConvert = (TappedEventArgs)e;
             var imgClicked = eventArgsConvert.Parameter;
-            _employeeSkillViewModel.SetSubAreaList(imgClicked);
+            _employeeSkillViewModel.OpenTypeName(imgClicked);
 
         }
         private void AreaImgUpTapped(object sender, EventArgs e)
         {
             var eventArgsConvert = (TappedEventArgs)e;
             var imgClicked = eventArgsConvert.Parameter;
-            _employeeSkillViewModel.CloseSubArea(imgClicked);
+            _employeeSkillViewModel.CloseTypeName(imgClicked);
         }
-        private void SubAreaImgDownTapped(object sender, EventArgs e)
+        private void TypeNameImgDownTapped(object sender, EventArgs e)
         {
-            //_employeeSkillViewModel.SubAreaImgDown = false;
-            //_employeeSkillViewModel.SubAreaImgUp = true;
-
+            var eventArgsConvert = (TappedEventArgs)e;
+            var imgClicked = eventArgsConvert.Parameter;
+            _employeeSkillViewModel.OpenSkillName(imgClicked);
         }
-        private void SubAreaImgUpTapped(object sender, EventArgs e)
+        private void TypeNameImgUpTapped(object sender, EventArgs e)
         {
-            //_employeeSkillViewModel.SubAreaImgDown = true;
-            //_employeeSkillViewModel.SubAreaImgUp = false;
+            var eventArgsConvert = (TappedEventArgs)e;
+            var imgClicked = eventArgsConvert.Parameter;
+            _employeeSkillViewModel.CloseSkillName(imgClicked);
         }
     }
 }

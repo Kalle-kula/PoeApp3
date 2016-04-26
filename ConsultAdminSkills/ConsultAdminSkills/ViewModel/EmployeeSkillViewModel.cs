@@ -21,7 +21,7 @@ namespace ConsultAdminSkills.ViewModel
 
         //public EmployeeSkillViewModel()
         //{
-            
+
         //}
 
 
@@ -32,22 +32,22 @@ namespace ConsultAdminSkills.ViewModel
             _employeeSkillFake = new EmployeeSkillFake();
 
 
-            
-                _employeeSkillFake.EmployeeSkills.Add(new EmployeeSkill()
-                {
-                    EmployeeId = _employeeSkillFake.EmployeeId,
-                    EmployeeFullName = _employeeSkillFake.EmployeeFullName,
-                    SkillId = _employeeSkillFake.SkillId,
-                    SkillName = _employeeSkillFake.SkillName,
-                    TypeId = _employeeSkillFake.TypeId,
-                    TypeName = _employeeSkillFake.TypeName,
-                    AreaId = _employeeSkillFake.AreaId,
-                    AreaName = _employeeSkillFake.AreaName,
-                    Level = _employeeSkillFake.Level,
-                    Comment = _employeeSkillFake.Comment,
-                    LastUpdate = _employeeSkillFake.LastUpdate
-                });
-            
+
+            _employeeSkillFake.EmployeeSkills.Add(new EmployeeSkill()
+            {
+                EmployeeId = _employeeSkillFake.EmployeeId,
+                EmployeeFullName = _employeeSkillFake.EmployeeFullName,
+                SkillId = _employeeSkillFake.SkillId,
+                SkillName = _employeeSkillFake.SkillName,
+                TypeId = _employeeSkillFake.TypeId,
+                TypeName = _employeeSkillFake.TypeName,
+                AreaId = _employeeSkillFake.AreaId,
+                AreaName = _employeeSkillFake.AreaName,
+                Level = _employeeSkillFake.Level,
+                Comment = _employeeSkillFake.Comment,
+                LastUpdate = _employeeSkillFake.LastUpdate
+            });
+
 
 
             //var list = new List<EmployeeCompetence>();
@@ -71,16 +71,15 @@ namespace ConsultAdminSkills.ViewModel
                 EmployeeSkillsList.Add(skill);
                 skill.AreaImgDownClicked = true;
                 skill.AreaImgUpClicked = false;
-                skill.SubAreaTextVisible = false;
-                skill.SubAreaImgDown = false;
-                skill.SubAreaImgUp = false;
+                skill.TypeNameImgDown = false;
+                skill.TypeNameImgUp = false;
             }
 
 
             string s = "";
         }
 
-        public void SetSubAreaList(object param)
+        public void OpenTypeName(object param)
         {
             var imgClicked = param as EmployeeSkill;
             if (imgClicked == null) return;
@@ -93,23 +92,18 @@ namespace ConsultAdminSkills.ViewModel
 
             //foreach (var list in EmployeeSkillsList)
             //{
-                foreach (var item in EmployeeSkillsList.Where(x => x.AreaId == AreaId))
-                {
-                    item.AreaImgDownClicked = false;
-                    item.AreaImgUpClicked = true;
-                }
+            foreach (var item in EmployeeSkillsList.Where(x => x.AreaId == AreaId))
+            {
+                item.AreaImgDownClicked = false;
+                item.AreaImgUpClicked = true;
+                item.TypeNameImgDown = true;
+            }
 
-            //}
-            // Här måste ny SubAreaLista skapas och sättas
-
-            //foreach (var item in EmployeeSubAreaList.Where(x => !x.SubAreaImgDown))
-            //{
-            //    item.SubAreaImgDown = true;
             //}
 
             string s = "";
         }
-        public void CloseSubArea(object param)
+        public void CloseTypeName(object param)
         {
             var imgClicked = param as EmployeeSkill;
             if (imgClicked == null) return;
@@ -121,9 +115,37 @@ namespace ConsultAdminSkills.ViewModel
             {
                 item.AreaImgDownClicked = true;
                 item.AreaImgUpClicked = false;
+                item.TypeNameImgUp = false;
             }
         }
 
+        public void OpenSkillName(object param)
+        {
+            var imgClicked = param as EmployeeSkill;
+            if (imgClicked == null) return;
+            AreaId = imgClicked.AreaId;
+            Area = imgClicked.AreaName;
+
+            foreach (var item in EmployeeSkillsList.Where(x => x.AreaId == AreaId))
+            {
+                item.TypeNameImgDown = false;
+                item.TypeNameImgUp = true;
+            }
+        }
+
+        public void CloseSkillName(object param)
+        {
+            var imgClicked = param as EmployeeSkill;
+            if (imgClicked == null) return;
+            AreaId = imgClicked.AreaId;
+            Area = imgClicked.AreaName;
+
+            foreach (var item in EmployeeSkillsList.Where(x => x.AreaId == AreaId))
+            {
+                item.TypeNameImgDown = true;
+                item.TypeNameImgUp = false;
+            }
+        }
 
         private List<EmployeeSkill> _employeeSkillsList;
 
@@ -138,60 +160,6 @@ namespace ConsultAdminSkills.ViewModel
                 }
             }
         }
-
-
-        //private bool _areaImgDownClicked;
-        //private bool _areaImgUpClicked;
-        //private bool _subAreaImgDown;
-        //private bool _subAreaImgUp;
-
-        //public bool AreaImgDownClicked
-        //{
-        //    get { return _areaImgDownClicked; }
-        //    set
-        //    {
-        //        if (_areaImgDownClicked != value)
-        //        {
-        //            SetPropertyField(nameof(AreaImgDownClicked), ref _areaImgDownClicked, value);
-        //        }
-        //    }
-        //}
-
-        //public bool AreaImgUpClicked
-        //{
-        //    get { return _areaImgUpClicked; }
-        //    set
-        //    {
-        //        if (_areaImgUpClicked != value)
-        //        {
-        //            SetPropertyField(nameof(AreaImgUpClicked), ref _areaImgUpClicked, value);
-        //        }
-        //    }
-        //}
-
-        //public bool SubAreaImgDown
-        //{
-        //    get { return _subAreaImgDown; }
-        //    set
-        //    {
-        //        if (_subAreaImgDown != value)
-        //        {
-        //            SetPropertyField(nameof(SubAreaImgDown), ref _subAreaImgDown, value);
-        //        }
-        //    }
-        //}
-
-        //public bool SubAreaImgUp
-        //{
-        //    get { return _subAreaImgUp; }
-        //    set
-        //    {
-        //        if (_subAreaImgUp != value)
-        //        {
-        //            SetPropertyField(nameof(SubAreaImgUp), ref _subAreaImgUp, value);
-        //        }
-        //    }
-        //}
 
     }
 }

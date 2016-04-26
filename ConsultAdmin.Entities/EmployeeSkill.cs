@@ -20,15 +20,11 @@ namespace ConsultAdmin.Entities
         public string Comment { get; set; }
         public DateTime LastUpdate { get; set; }
 
-        //public bool AreaImgUpClicked { get; set; }
-        //public bool AreaImgDownClicked { get; set; }
-        //public bool SubAreaImgUp { get; set; }
-        public bool SubAreaTextVisible { get; set; }
-        //public bool SubAreaImgDown { get; set; }
+        
         private bool _areaImgDownClicked;
         private bool _areaImgUpClicked;
-        private bool _subAreaImgDown;
-        private bool _subAreaImgUp;
+        private bool _typeNameImgDown;
+        private bool _typeNameImgUp;
         public bool AreaImgDownClicked
         {
             get { return _areaImgDownClicked; }
@@ -53,26 +49,26 @@ namespace ConsultAdmin.Entities
             }
         }
 
-        public bool SubAreaImgDown
+        public bool TypeNameImgDown
         {
-            get { return _subAreaImgDown; }
+            get { return _typeNameImgDown; }
             set
             {
-                if (_subAreaImgDown != value)
+                if (_typeNameImgDown != value)
                 {
-                    SetPropertyField(nameof(SubAreaImgDown), ref _subAreaImgDown, value);
+                    SetPropertyField(nameof(TypeNameImgDown), ref _typeNameImgDown, value);
                 }
             }
         }
 
-        public bool SubAreaImgUp
+        public bool TypeNameImgUp
         {
-            get { return _subAreaImgUp; }
+            get { return _typeNameImgUp; }
             set
             {
-                if (_subAreaImgUp != value)
+                if (_typeNameImgUp != value)
                 {
-                    SetPropertyField(nameof(SubAreaImgUp), ref _subAreaImgUp, value);
+                    SetPropertyField(nameof(TypeNameImgUp), ref _typeNameImgUp, value);
                 }
             }
         }
