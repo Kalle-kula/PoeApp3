@@ -13,8 +13,8 @@
   </ContentPage.ToolbarItems>
 
   <ContentPage.Content>
-    <ListView ItemsSource="{Binding EmployeeSkillsList}" ItemTapped="EmployeeSkillList_OnItemTapped" HasUnevenRows="True">
-
+    <ListView ItemsSource="{Binding EmployeeSkillsList}" HasUnevenRows="True">
+      <!--ItemTapped="EmployeeSkillList_OnItemTapped"-->
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
@@ -98,9 +98,13 @@
                     <ColumnDefinition Width="*" />
                   </Grid.ColumnDefinitions>
 
-                  <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="5" Text="{Binding SkillName}"/>
+                  <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="5" Text="{Binding SkillName}">
+                    <Label.GestureRecognizers>
+                      <TapGestureRecognizer Tapped="SkillTapped" CommandParameter="{Binding .}"/>
+                    </Label.GestureRecognizers>
+                  </Label>
                   <Label Grid.Row="0" Grid.Column="7" Text="{Binding Level}"/>
-
+                    
                 </Grid>
                 
               </Grid>

@@ -11,28 +11,22 @@ namespace ConsultAdminSkills.ViewModel
 {
     public class EmployeeSkillViewModel : BaseViewModel
     {
-        //public int AreaId { get; set; }
 
         private EmployeeSkillFake _employeeSkillFake;
-        private EmployeeCompetence _employeeCompetence;
         public int AreaId { get; set; }
         public string Area { get; set; }
-        //public List<EmployeeSubArea> SubAreas { get; set; }
+        public int SkillId { get; set; }
 
         //public EmployeeSkillViewModel()
         //{
 
         //}
 
-
         public void SetSkillLists()
         {
             //Fyller på modellen(EmployeeSkill) från fejken(EmployeeSkillFake)
 
             _employeeSkillFake = new EmployeeSkillFake();
-
-
-
             _employeeSkillFake.EmployeeSkills.Add(new EmployeeSkill()
             {
                 EmployeeId = _employeeSkillFake.EmployeeId,
@@ -48,8 +42,6 @@ namespace ConsultAdminSkills.ViewModel
                 LastUpdate = _employeeSkillFake.LastUpdate
             });
 
-
-
             //var list = new List<EmployeeCompetence>();
             //foreach (var item in _employeeSkillFake.EmployeeAreaList)
             //{
@@ -59,8 +51,6 @@ namespace ConsultAdminSkills.ViewModel
             //    //employeeCompetence.IsArea = true;
             //    list.Add(competence);
             //}
-
-
 
             //Fyller EmployeeSkillCollection
             EmployeeSkillsList = new List<EmployeeSkill>();
@@ -74,8 +64,6 @@ namespace ConsultAdminSkills.ViewModel
                 skill.TypeNameImgDown = false;
                 skill.TypeNameImgUp = false;
             }
-
-
             string s = "";
         }
 
@@ -98,7 +86,6 @@ namespace ConsultAdminSkills.ViewModel
                 item.AreaImgUpClicked = true;
                 item.TypeNameImgDown = true;
             }
-
             //}
 
             string s = "";
@@ -147,6 +134,12 @@ namespace ConsultAdminSkills.ViewModel
             }
         }
 
+        public void GetSkillId(object param)
+        {
+            var skillClicked = param as EmployeeSkill;
+            SkillId = skillClicked.SkillId;
+        }
+
         private List<EmployeeSkill> _employeeSkillsList;
 
         public List<EmployeeSkill> EmployeeSkillsList
@@ -160,6 +153,7 @@ namespace ConsultAdminSkills.ViewModel
                 }
             }
         }
+
 
     }
 }

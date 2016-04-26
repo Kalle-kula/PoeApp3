@@ -26,11 +26,11 @@ namespace ConsultAdminSkills.UI.View
             _employeeSkillViewModel.SetSkillLists();
         }
 
-        private void EmployeeSkillList_OnItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            if (e == null) return;
-            var itemClicked = e.Item;
-        }
+        //private void EmployeeSkillList_OnItemTapped(object sender, ItemTappedEventArgs e)
+        //{
+        //    if (e == null) return;
+        //    var itemClicked = e.Item;
+        //}
 
         private void ToolbarItem_Edit(object sender, EventArgs e)
         {
@@ -61,5 +61,13 @@ namespace ConsultAdminSkills.UI.View
             var imgClicked = eventArgsConvert.Parameter;
             _employeeSkillViewModel.CloseSkillName(imgClicked);
         }
+        private async void SkillTapped(object sender, EventArgs e)
+        {
+            var eventArgsConvert = (TappedEventArgs)e;
+            var skillClicked = eventArgsConvert.Parameter;
+            await Navigation.PushModalAsync(new EmployeeSkillTabbedRoot());
+        }
+
+
     }
 }

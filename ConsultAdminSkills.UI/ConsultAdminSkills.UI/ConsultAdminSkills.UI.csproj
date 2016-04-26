@@ -49,9 +49,16 @@
     <Compile Include="View\EmployeeProjectsPage.xaml.cs">
       <DependentUpon>EmployeeProjectsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EmployeeSkillDescriptionPage.xaml.cs">
+      <DependentUpon>EmployeeSkillDescriptionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmployeeSkillLevelListPage.xaml.cs">
+      <DependentUpon>EmployeeSkillLevelListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EmployeeSkillsPage.xaml.cs">
       <DependentUpon>EmployeeSkillsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EmployeeSkillTabbedRoot.cs" />
     <Compile Include="View\EmployeeTabbedRootPage.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +167,18 @@
       <Project>{c53acda2-64da-41dd-ab8a-49da5706ce8e}</Project>
       <Name>ConsultAdminSkills</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\EmployeeSkillDescriptionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\EmployeeSkillLevelListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
