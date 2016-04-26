@@ -11,89 +11,165 @@ namespace ConsultAdminSkills.ViewModel
 {
     public class EmployeeSkillViewModel : BaseViewModel
     {
+        //public int AreaId { get; set; }
 
-        public ObservableCollection<EmployeeSkills> EmployeeSkillsCollection { get; set; }
-        public ObservableCollection<EmployeeSkills.EmployeeSubArea> SubAreaCollection { get; set; }
-        public ObservableCollection<EmployeeSkills.EmployeeSkill> SkillCollection { get; set; }
         private EmployeeSkillFake _employeeSkillFake;
-        //public List<EmployeeSkills> Area { get; set; }
-        public List<EmployeeSkills.EmployeeSubArea> SubArea = new List<EmployeeSkills.EmployeeSubArea>();
-        public List<EmployeeSkills.EmployeeSkill> Skill = new List<EmployeeSkills.EmployeeSkill>();
-        List<EmployeeSkills> EmployeeSkillsList = new List<EmployeeSkills>();
+        private EmployeeCompetence _employeeCompetence;
+        public int AreaId { get; set; }
+        public string Area { get; set; }
+        //public List<EmployeeSubArea> SubAreas { get; set; }
 
-        public EmployeeSkillViewModel()
+
+        public void SetSkillLists()
         {
-            SkillCollection = new ObservableCollection<EmployeeSkills.EmployeeSkill>();
-            SubAreaCollection = new ObservableCollection<EmployeeSkills.EmployeeSubArea>();
-            EmployeeSkillsCollection = new ObservableCollection<EmployeeSkills>();
+            //Fyller på alla modeller(EmployeeArea/SubArea/Skill) från fejken(EmployeeSkillFake)
+
             _employeeSkillFake = new EmployeeSkillFake();
 
-            for (int i = 0; i < _employeeSkillFake.SkillId.Count; i++)
+            for (int i = 0; i < _employeeSkillFake.SkillIds.Count; i++)
             {
-                _employeeSkillFake.Skills.Add(new EmployeeSkills.EmployeeSkill()
+                _employeeSkillFake.Skills.Add(new EmployeeSkills()
                 {
-                    SkillId = _employeeSkillFake.SkillId[i],
+                    SkillId = _employeeSkillFake.SkillIds[i],
                     Skill = _employeeSkillFake.Skill[i],
                     SkillGrade = _employeeSkillFake.SkillGrade[i],
-                    //AreaId = _employeeSkillFake.AreaId[i],
-                    //SubAreaId = _employeeSkillFake.SubAreaId[i]
 
                 });
             }
-            //SkillCollection.Clear();
-            //foreach (var item in Skill)
-            //{
-            //    SkillCollection.Add(item);
-            //}
 
             for (int i = 0; i < _employeeSkillFake.SubAreaId.Count; i++)
             {
-                _employeeSkillFake.SubAreas.Add(new EmployeeSkills.EmployeeSubArea()
+                _employeeSkillFake.SubAreas.Add(new EmployeeSubArea()
+                //EmployeeSubAreaList.Add(new EmployeeSkills.EmployeeSubArea()
+
                 {
                     SubAreaId = _employeeSkillFake.SubAreaId[i],
                     SubArea = _employeeSkillFake.SubArea[i],
-                    Skills = _employeeSkillFake.Skills,
+                    //Skills = _employeeSkillFake.Skills,
                     //AreaId = _employeeSkillFake.AreaId[i]
 
+
+                });
+                //EmployeeSubAreaList = _employeeSkillFake.SubAreas;
+            }
+
+            for (int i = 0; i < _employeeSkillFake.AreaIds.Count; i++)
+            {
+                _employeeSkillFake.EmployeeAreaList.Add(new EmployeeArea()
+                {
+                    Area = _employeeSkillFake.Area[i],
+                    //SubAreas = _employeeSkillFake.SubAreas,
+                    AreaImgDownClicked = true,
+                    SubAreaTextVisible = false,
+                    AreaImgUpClicked = false,
+                    SubAreaImgDown = false,
+                    SubAreaImgUp = false,
+                    SkillTextVisible = false
                 });
             }
-            //SubAreaCollection.Clear();
-            //foreach (var subArea in SubArea)
+
+            var list = new List<EmployeeCompetence>();
+            foreach (var item in _employeeSkillFake.EmployeeAreaList)
+            {
+                var competence = new EmployeeCompetence(item);
+                //var employeeCompetence = new EmployeeCompetence();
+                //employeeCompetence.EmployeeAreas = item;
+                //employeeCompetence.IsArea = true;
+                list.Add(competence);
+            }
+
+            //Fyller på EmployeeCompetence modellen
+            //_employeeCompetence = new EmployeeCompetence();
+
+            //_employeeCompetence.EmployeeAreas = _employeeSkillFake.EmployeeAreaList;
+            //_employeeCompetence.EmployeeSubAreas = _employeeSkillFake.SubAreas;
+            //_employeeCompetence.EmployeeSkills = _employeeSkillFake.Skills;
+
+            //Fyller EmployeeCompetenceCollection
+            EmployeeCompetenceCollection = new ObservableCollection<EmployeeCompetence>();
+            EmployeeCompetenceCollection.Clear();
+            EmployeeCompetenceCollection.Add(_employeeCompetence);
+
+            string s = "";
+        }
+
+        public void SetSubAreaList(object param)
+        {
+            var imgClicked = param as EmployeeArea;
+            if (imgClicked == null) return;
+
+            AreaId = imgClicked.AreaId;
+            Area = imgClicked.Area;
+            //här ska kolla ursprungliga listan ändras .where(x => x.areaId == areaId) på den arean där man klickade
+
+            //foreach (var item in EmployeeCompetenceList.Where(x => x.EmployeeAreas.AreaId == AreaId))
+            
+            //foreach (var list in EmployeeCompetenceCollection)
             //{
-            //    SubAreaCollection.Add(subArea);
+            //    foreach (var item in list.EmployeeAreas.Where(x => x.AreaId == AreaId))
+            //    {
+            //        item.AreaImgDownClicked = false;
+            //        item.AreaImgUpClicked = true;
+            //    }
+                
             //}
 
-            for (int i = 0; i < _employeeSkillFake.AreaId.Count; i++)
-            {
-                EmployeeSkillsList.Add(new EmployeeSkills()
-                {
-                    AreaId = _employeeSkillFake.AreaId[i],
-                    Area = _employeeSkillFake.Area[i],
-                    SubAreas = _employeeSkillFake.SubAreas
-                });
-            }
-            EmployeeSkillsCollection.Clear();
-            foreach (var skill in EmployeeSkillsList)
-            {
-                EmployeeSkillsCollection.Add(skill);
-            }
-            //var kolla = EmployeeSkillsCollection.FirstOrDefault(x => x.SubAreas)
-    }
+            //AreaImgDownClicked = false;
+            //AreaImgUpClicked = true;
 
-        public void AreaClicked()
+            //EmployeeSkills.
+            // Här måste ny SubAreaLista skapas och sättas
+
+            //EmployeeSubAreaList = new List<EmployeeSubArea>();
+            //Kollar vilken area som blivit klickad på genom att jämföra med ursprungliga listan och tar bort den inte klickade arean till ny lista (clickedArea)
+
+
+            //foreach (var subArea in SubAreas)
+            //{
+            //    EmployeeSubAreaList.Add(subArea);
+            //}
+
+
+            //foreach (var item in EmployeeSubAreaList.Where(x => !x.SubAreaImgDown))
+            //{
+            //    item.SubAreaImgDown = true;
+            //}
+
+            string s = "";
+        }
+        public void CloseSubArea(object param)
         {
+            var imgClicked = param as EmployeeCompetence;
+            if (imgClicked == null) return;
+            //AreaId = imgClicked.EmployeeAreas.AreaId;
+            //Area = imgClicked.EmployeeAreas.Area;
+            //SubAreas = imgClicked.EmployeeAreas.SubAreas;
 
+            //foreach (var item in EmployeeCompetenceList.Where(x => x.EmployeeAreas.AreaId == AreaId))
+            //{
+            //    item.EmployeeAreas.AreaImgDownClicked = true;
+            //    item.EmployeeAreas.AreaImgUpClicked = false;
+            //}
         }
 
         private bool _areaImgDownClicked;
         private bool _areaImgUpClicked;
-        private bool _subAreaTextVisible;
         private bool _subAreaImgDown;
         private bool _subAreaImgUp;
         private bool _skillTextVisible;
+        private ObservableCollection<EmployeeCompetence> _employeeCompetenceCollection;
 
-        //public bool AreaImgDownClicked { get; set; }
-
+        public ObservableCollection<EmployeeCompetence> EmployeeCompetenceCollection
+        {
+            get { return _employeeCompetenceCollection; }
+            set
+            {
+                if (_employeeCompetenceCollection != value)
+                {
+                    SetPropertyField(nameof(EmployeeCompetenceCollection), ref _employeeCompetenceCollection, value);
+                }
+            }
+        }
 
         public bool AreaImgDownClicked
         {
@@ -115,18 +191,6 @@ namespace ConsultAdminSkills.ViewModel
                 if (_areaImgUpClicked != value)
                 {
                     SetPropertyField(nameof(AreaImgUpClicked), ref _areaImgUpClicked, value);
-                }
-            }
-        }
-
-        public bool SubAreaTextVisible
-        {
-            get { return _subAreaTextVisible; }
-            set
-            {
-                if (_subAreaTextVisible != value)
-                {
-                    SetPropertyField(nameof(SubAreaTextVisible), ref _subAreaTextVisible, value);
                 }
             }
         }
@@ -166,14 +230,6 @@ namespace ConsultAdminSkills.ViewModel
                 }
             }
         }
-        public void SetTextVisibleFalse()
-        {
-            AreaImgDownClicked = true;
-            SubAreaTextVisible = false;
-            AreaImgUpClicked = false;
-            SubAreaImgDown = false;
-            SubAreaImgUp = false;
-            SkillTextVisible = false;
-        }
+
     }
 }

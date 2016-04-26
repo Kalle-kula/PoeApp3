@@ -116,7 +116,6 @@
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\ConsultAdmin.Entities\ConsultAdmin.Entities.csproj">
       <Project>{fcf77836-95d6-43c4-a008-88b487525be5}</Project>

@@ -15,32 +15,29 @@ namespace ConsultAdminSkills.UI.View
         private EmployeeSkillViewModel _employeeSkillViewModel;
         public EmployeeSkillsPage()
         {
-
             InitializeComponent();
-
-
             _employeeSkillViewModel = new EmployeeSkillViewModel();
-            
-                //if (employeeViewModel != null)
-                //{
-                //    _employeeViewModel = employeeViewModel;
-                //}
-                BindingContext = _employeeSkillViewModel;
-           
+            BindingContext = _employeeSkillViewModel;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            _employeeSkillViewModel.SetTextVisibleFalse();
+            //_employeeSkillViewModel.SetTextVisibleFalse();
+            _employeeSkillViewModel.SetSkillLists();
+            //SubAreaList.RowHeigt = 1;
         }
 
         private void EmployeeSkillList_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e == null) return;
             var itemClicked = e.Item;
-            
+        }
 
+        private void SubAreaList_OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            if (e == null) return;
+            var itemClicked = e.Item;
         }
 
         private void ToolbarItem_Edit(object sender, EventArgs e)
@@ -49,15 +46,16 @@ namespace ConsultAdminSkills.UI.View
         }
         private void AreaImgDownTapped(object sender, EventArgs e)
         {
-            _employeeSkillViewModel.AreaImgUpClicked = true;
-            _employeeSkillViewModel.AreaImgDownClicked = false;
-            _employeeSkillViewModel.SubAreaTextVisible = true;
-            _employeeSkillViewModel.SubAreaImgDown = true;
+            var eventArgsConvert = (TappedEventArgs)e;
+            var imgClicked = eventArgsConvert.Parameter;
+            _employeeSkillViewModel.SetSubAreaList(imgClicked);
 
         }
         private void AreaImgUpTapped(object sender, EventArgs e)
         {
-           _employeeSkillViewModel.SetTextVisibleFalse();
+            var eventArgsConvert = (TappedEventArgs)e;
+            var imgClicked = eventArgsConvert.Parameter;
+            _employeeSkillViewModel.CloseSubArea(imgClicked);
         }
         private void SubAreaImgDownTapped(object sender, EventArgs e)
         {
