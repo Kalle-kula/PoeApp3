@@ -23,9 +23,7 @@ namespace ConsultAdminSkills.UI.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //_employeeSkillViewModel.SetTextVisibleFalse();
             _employeeSkillViewModel.SetSkillLists();
-            //SubAreaList.RowHeigt = 1;
         }
 
         private void EmployeeSkillList_OnItemTapped(object sender, ItemTappedEventArgs e)
@@ -59,16 +57,14 @@ namespace ConsultAdminSkills.UI.View
         }
         private void SubAreaImgDownTapped(object sender, EventArgs e)
         {
-            _employeeSkillViewModel.SubAreaImgDown = false;
-            _employeeSkillViewModel.SkillTextVisible = true;
-            _employeeSkillViewModel.SubAreaImgUp = true;
+            //_employeeSkillViewModel.SubAreaImgDown = false;
+            //_employeeSkillViewModel.SubAreaImgUp = true;
 
         }
         private void SubAreaImgUpTapped(object sender, EventArgs e)
         {
-            _employeeSkillViewModel.SubAreaImgDown = true;
-            _employeeSkillViewModel.SkillTextVisible = false;
-            _employeeSkillViewModel.SubAreaImgUp = false;
+            //_employeeSkillViewModel.SubAreaImgDown = true;
+            //_employeeSkillViewModel.SubAreaImgUp = false;
         }
     }
 }

@@ -13,7 +13,7 @@
   </ContentPage.ToolbarItems>
 
   <ContentPage.Content>
-    <ListView ItemsSource="{Binding EmployeeCompetenceCollection}" ItemTapped="EmployeeSkillList_OnItemTapped" HasUnevenRows="True">
+    <ListView ItemsSource="{Binding EmployeeSkillsList}" ItemTapped="EmployeeSkillList_OnItemTapped" HasUnevenRows="True">
 
       <ListView.ItemTemplate>
         <DataTemplate>
@@ -21,18 +21,11 @@
             <ViewCell.View>
 
               <Grid>
-                <!--RowSpacing="0.3"-->
                 <Grid.RowDefinitions>
                   <RowDefinition Height="Auto" />
                   <RowDefinition Height="Auto" />
-                  <!--<RowDefinition Height="Auto" />-->
-                  <!--<RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />-->
-                  <!--<RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />-->
-
                 </Grid.RowDefinitions>
+                
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="*" />
                   <ColumnDefinition Width="*" />
@@ -42,33 +35,26 @@
                   <ColumnDefinition Width="*" />
                   <ColumnDefinition Width="*" />
                   <ColumnDefinition Width="*" />
-
                 </Grid.ColumnDefinitions>
-                <!--<Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="4" HorizontalOptions="Center" FontAttributes="Bold"/>
-                  -->
-                <!--Text="{Binding NameAndSkill}"-->
                 <Label Grid.Row="0" Grid.Column="1"/>
 
-                <!--<controls:ExtendedPicker Grid.Row="2" Grid.ColumnSpan="8" x:Name="AreaPicker" DisplayProperty="Choose skill"/>-->
-                <!--ItemSource="{Binding AreaSkills}"-->
-                <!--SelectedItem="{Binding AreaChosenSkill}"-->
-                <Image Grid.Row="1" Grid.Column="0" Source="@drawable/ic_keyboard_arrow_down_white_18dp" IsVisible="{Binding EmployeeCompetenceCollection.AreaImgDownClicked}">
+               
+                <Image Grid.Row="1" Grid.Column="0" Source="@drawable/ic_keyboard_arrow_down_white_18dp" IsVisible="{Binding AreaImgDownClicked}">
                   <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="AreaImgDownTapped" CommandParameter="{Binding .}"/>
                   </Image.GestureRecognizers>
                 </Image>
-                <Image Grid.Row="1" Grid.Column="0" Source="@drawable/ic_keyboard_arrow_up_white_18dp" IsVisible="{Binding EmployeeCompetenceCollection.EmployeeCompetenceCollection.AreaImgUpClicked}">
+                <Image Grid.Row="1" Grid.Column="0" Source="@drawable/ic_keyboard_arrow_up_white_18dp" IsVisible="{Binding AreaImgUpClicked}">
                   <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="AreaImgUpTapped" CommandParameter="{Binding .}"/>
                   </Image.GestureRecognizers>
                 </Image>
-                <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="7" Text="{Binding EmployeeCompetenceCollection.Area}"/>
+                <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="7" Text="{Binding AreaName}"/>
               </Grid>
 
-              <Grid IsVisible="{Binding AreaImgUpClicked}">
-                <!--RowSpacing="0.3"-->
+              <!--<Grid IsVisible="{Binding AreaImgUpClicked}">
+                --><!--RowSpacing="0.3"--><!--
                 <Grid.RowDefinitions>
-                  <RowDefinition Height="Auto" />
                   <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
@@ -82,18 +68,19 @@
                   <ColumnDefinition Width="*" />
                   <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="7" Text="{Binding EmployeeCompetenceCollection.SubArea}"/>
-                <Image Grid.Row="2" Grid.Column="1" Source="@drawable/ic_keyboard_arrow_down_white_18dp" IsVisible="{Binding AreaImgUpClicked}">
+                <Image Grid.Row="0" Grid.Column="1" Source="@drawable/ic_keyboard_arrow_down_white_18dp" IsVisible="{Binding AreaImgUpClicked}">
                   <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="SubAreaImgDownTapped"/>
                   </Image.GestureRecognizers>
                 </Image>
-                <Image Grid.Row="2" Grid.Column="1" Source="@drawable/ic_keyboard_arrow_up_white_18dp" IsVisible="{Binding SubAreaImgUp}">
+                <Image Grid.Row="0" Grid.Column="1" Source="@drawable/ic_keyboard_arrow_up_white_18dp" IsVisible="{Binding SubAreaImgUp}">
                   <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="SubAreaImgUpTapped"/>
                   </Image.GestureRecognizers>
                 </Image>
-              </Grid>
+                <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="7" Text="{Binding TypeName}"/>
+              </Grid>-->
+              
               <!--<ListView ItemsSource="{Binding EmployeeSubAreaList}" ItemTapped="SubAreaList_OnItemTapped" HasUnevenRows="True" IsVisible="{Binding AreaImgUpClicked}">
                     
                     <ListView.ItemTemplate>
@@ -145,3 +132,7 @@
   </ContentPage.Content>
 
 </ContentPage>
+
+ <!--<controls:ExtendedPicker Grid.Row="2" Grid.ColumnSpan="8" x:Name="AreaPicker" DisplayProperty="Choose skill"/>-->
+                <!--ItemSource="{Binding AreaSkills}"-->
+                <!--SelectedItem="{Binding AreaChosenSkill}"-->
