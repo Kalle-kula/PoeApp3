@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsultAdminSkills.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,10 +10,11 @@ namespace ConsultAdminSkills.UI.View
 {
     public class EmployeeSkillTabbedRoot : TabbedPage
     {
-        public EmployeeSkillTabbedRoot()
+        
+        public EmployeeSkillTabbedRoot(int skillId)
         {
-            Children.Add(new NavigationPage(new EmployeeSkillDescriptionPage()) { Title = "Description" });
-            Children.Add(new NavigationPage(new EmployeeSkillLevelListPage()) { Title = "Employees" });
+            Children.Add(new NavigationPage(new EmployeeSkillDescriptionPage(skillId)) { Title = "Description" });
+            Children.Add(new NavigationPage(new EmployeeSkillLevelListPage(skillId)) { Title = "Employees" });
         }
     }
 }

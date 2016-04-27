@@ -1,6 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              x:Class="ConsultAdminSkills.UI.View.EmployeeSkillDescriptionPage">
-  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+
+  <ContentPage.Content>
+    <Grid Padding="20">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      
+      <Label Grid.Row="0" Grid.Column="0" Text="{Binding SkillName}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+      <Label Grid.Row="1" Grid.Column="0" Text="{Binding Description}" FontSize="15"/>
+
+    </Grid>
+      
+  </ContentPage.Content>
+
 </ContentPage>

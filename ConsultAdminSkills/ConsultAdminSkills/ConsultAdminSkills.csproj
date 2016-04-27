@@ -40,7 +40,9 @@
     <Compile Include="Interface\IExternalMaps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\EmployeeManager.cs" />
+    <Compile Include="Service\SkillManager.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeCompetenceViewModel.cs" />
     <Compile Include="ViewModel\EmployeeListViewModel.cs" />
     <Compile Include="ViewModel\EmployeeSkillViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />

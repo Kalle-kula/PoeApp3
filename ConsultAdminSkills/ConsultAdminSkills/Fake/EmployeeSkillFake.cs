@@ -26,14 +26,14 @@ namespace ConsultAdminSkills.Fake
 
         public int EmployeeId = 82;
         public string EmployeeFullName = "Kalle Hallert";
-        public int SkillId = 2;
+        public int SkillId = 1;
         public string SkillName = "C#";
         public int TypeId = 3;
         public string TypeName = "Language";
         public int AreaId = 4;
         public string AreaName = "Development";
         public int Level = 6;
-        public string Comment = "I'm ok";
+        public string Comment = "C# is a multi-paradigm programming language encompassing strong typing, imperative, declarative, functional, generic, object-oriented (class-based), and component-oriented programming disciplines.";
         public DateTime LastUpdate = DateTime.Now;
 
 

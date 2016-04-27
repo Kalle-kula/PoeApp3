@@ -16,7 +16,7 @@ namespace ConsultAdminSkills.ViewModel
         public int AreaId { get; set; }
         public string Area { get; set; }
         public int SkillId { get; set; }
-
+        
         //public EmployeeSkillViewModel()
         //{
 
@@ -134,11 +134,23 @@ namespace ConsultAdminSkills.ViewModel
             }
         }
 
-        public void GetSkillId(object param)
+        public int GetSkillId(object param)
         {
             var skillClicked = param as EmployeeSkill;
-            SkillId = skillClicked.SkillId;
+            int skillId = skillClicked.SkillId;
+            return skillId;
         }
+
+        //public void SetSkillDescription()
+        //{
+        //    SetSkillLists();
+
+        //    foreach (var skill in EmployeeSkillsList.Where(x => x.SkillId == SkillId))
+        //    {
+        //        SkillName = skill.SkillName;
+        //        Comment = skill.Comment;
+        //    }
+        //}
 
         private List<EmployeeSkill> _employeeSkillsList;
 

@@ -61,13 +61,24 @@ namespace ConsultAdminSkills.UI.View
             var imgClicked = eventArgsConvert.Parameter;
             _employeeSkillViewModel.CloseSkillName(imgClicked);
         }
-        private async void SkillTapped(object sender, EventArgs e)
+        private void SkillTapped(object sender, EventArgs e)
         {
+            
             var eventArgsConvert = (TappedEventArgs)e;
             var skillClicked = eventArgsConvert.Parameter;
-            await Navigation.PushModalAsync(new EmployeeSkillTabbedRoot());
+            int skillId = _employeeSkillViewModel.GetSkillId(skillClicked);
+            Navigation.PushModalAsync(new EmployeeSkillTabbedRoot(skillId));
         }
 
-
+        //public void DoStuff()
+        //{
+        //    int i = 2;
+        //    int secoundInt =  GiveMeAValue(out i);
+        //}
+        //public int GiveMeAValue(out int i)
+        //{
+        //    i = 8;
+        //    return 7;
+        //}
     }
 }
