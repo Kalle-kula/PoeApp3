@@ -8,6 +8,11 @@ namespace ConsultAdmin.Entities
 {
     public class EmployeeSkill : BaseModel
     {
+        //public EmployeeSkill()
+        //{
+            
+        //}
+
         public int EmployeeId { get; set; }
         public string EmployeeFullName { get; set; }
         public int SkillId { get; set; }
@@ -21,6 +26,7 @@ namespace ConsultAdmin.Entities
         public DateTime LastUpdate { get; set; }
 
         
+
         private bool _areaImgDownClicked;
         private bool _areaImgUpClicked;
         private bool _typeNameImgDown;
@@ -72,5 +78,6 @@ namespace ConsultAdmin.Entities
                 }
             }
         }
+
     }
 }

@@ -10,10 +10,9 @@ namespace ConsultAdmin.Entities
     {
 
         public int SkillId { get; set; }
-        public bool IsSkill { get; set; }
         public int AreaId { get; set; }
-        public int SubAreaId { get; set; }
-        public string Skill { get; set; }
-        public int SkillGrade { get; set; }
+        public int TypeId { get; set; }
+        public string SkillName { get; set; }
+        public int Level { get; set; }
     }
 }

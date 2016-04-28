@@ -20,10 +20,10 @@ namespace ConsultAdminSkills.UI.View
             BindingContext = _employeeSkillViewModel;
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-            _employeeSkillViewModel.SetSkillLists();
+            await _employeeSkillViewModel.SetSkillLists();
         }
 
         //private void EmployeeSkillList_OnItemTapped(object sender, ItemTappedEventArgs e)

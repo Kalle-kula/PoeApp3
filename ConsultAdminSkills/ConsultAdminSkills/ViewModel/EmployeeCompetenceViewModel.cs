@@ -59,14 +59,27 @@ namespace ConsultAdminSkills.ViewModel
             if (skill == null) return;
             SkillName = skill.SkillName;
             Description = skill.Description;
-            foreach (var list in skill.SkillEmployees)
-            {
-                foreach (var name in list.EmployeeFullName)
-                {
-                    SkillEmployees.Add(name);
-                }
-            }
-            SkillEmployees = skill.SkillEmployees;
+
+            //SkillEmployees = skill.SkillEmployees;
+            //var list = new List<>
+
+            //foreach (var list in SkillEmployees)
+            //{
+            //    foreach (var name in list.EmployeeFullName)
+            //    {
+            //        //SkillEmployees.Add(name);
+            //    }
+            //}
+
+            //var list = new List<EmployeeCompetence>();
+            //foreach (var item in _employeeSkillFake.EmployeeAreaList)
+            //{
+            //    var competence = new EmployeeCompetence(item);
+            //    //var employeeCompetence = new EmployeeCompetence();
+            //    //employeeCompetence.EmployeeAreas = item;
+            //    //employeeCompetence.IsArea = true;
+            //    list.Add(competence);
+            //}
         }
     }
 }

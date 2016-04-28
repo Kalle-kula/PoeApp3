@@ -1,5 +1,6 @@
 ﻿using ConsultAdmin.Entities;
 using ConsultAdminSkills.Fake;
+using ConsultAdminSkills.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,37 +13,38 @@ namespace ConsultAdminSkills.ViewModel
     public class EmployeeSkillViewModel : BaseViewModel
     {
 
-        private EmployeeSkillFake _employeeSkillFake;
+        //private EmployeeSkillFake _employeeSkillFake;
+        private SkillManager _skillManager;
         public int AreaId { get; set; }
         public string Area { get; set; }
         public int SkillId { get; set; }
-        
+        int employeeId = 3;
         //public EmployeeSkillViewModel()
         //{
 
         //}
 
-        public void SetSkillLists()
+        public async Task SetSkillLists()
         {
             //Fyller på modellen(EmployeeSkill) från fejken(EmployeeSkillFake)
 
-            _employeeSkillFake = new EmployeeSkillFake();
-            _employeeSkillFake.EmployeeSkills.Add(new EmployeeSkill()
-            {
-                EmployeeId = _employeeSkillFake.EmployeeId,
-                EmployeeFullName = _employeeSkillFake.EmployeeFullName,
-                SkillId = _employeeSkillFake.SkillId,
-                SkillName = _employeeSkillFake.SkillName,
-                TypeId = _employeeSkillFake.TypeId,
-                TypeName = _employeeSkillFake.TypeName,
-                AreaId = _employeeSkillFake.AreaId,
-                AreaName = _employeeSkillFake.AreaName,
-                Level = _employeeSkillFake.Level,
-                Comment = _employeeSkillFake.Comment,
-                LastUpdate = _employeeSkillFake.LastUpdate
-            });
+            //_employeeSkillFake = new EmployeeSkillFake();
+            //_employeeSkillFake.EmployeeSkills.Add(new EmployeeSkill()
+            //{
+            //    EmployeeId = _employeeSkillFake.EmployeeId,
+            //    EmployeeFullName = _employeeSkillFake.EmployeeFullName,
+            //    SkillId = _employeeSkillFake.SkillId,
+            //    SkillName = _employeeSkillFake.SkillName,
+            //    TypeId = _employeeSkillFake.TypeId,
+            //    TypeName = _employeeSkillFake.TypeName,
+            //    AreaId = _employeeSkillFake.AreaId,
+            //    AreaName = _employeeSkillFake.AreaName,
+            //    Level = _employeeSkillFake.Level,
+            //    Comment = _employeeSkillFake.Comment,
+            //    LastUpdate = _employeeSkillFake.LastUpdate
+            //});
 
-            //var list = new List<EmployeeCompetence>();
+            //var list = new List<EmployeeCompetence>(); <---EmployeeSkillsList
             //foreach (var item in _employeeSkillFake.EmployeeAreaList)
             //{
             //    var competence = new EmployeeCompetence(item);
@@ -52,18 +54,34 @@ namespace ConsultAdminSkills.ViewModel
             //    list.Add(competence);
             //}
 
-            //Fyller EmployeeSkillCollection
             EmployeeSkillsList = new List<EmployeeSkill>();
-            EmployeeSkillsList.Clear();
+            _skillManager = new SkillManager();
+            //EmployeeSkillsList.Clear();
+            EmployeeSkillsList = await _skillManager.GetAllEmployeeSkills(employeeId);
 
-            foreach (var skill in _employeeSkillFake.EmployeeSkills)
+            
+            
+            if (EmployeeSkillsList == null) return;
+            foreach (var employeeSkill in EmployeeSkillsList)
             {
-                EmployeeSkillsList.Add(skill);
-                skill.AreaImgDownClicked = true;
-                skill.AreaImgUpClicked = false;
-                skill.TypeNameImgDown = false;
-                skill.TypeNameImgUp = false;
+                employeeSkill.EmployeeId = employeeId;
+                employeeSkill.AreaImgDownClicked = true;
+                
             }
+            //Här:
+
+            //Fyller EmployeeSkillCollection
+            //EmployeeSkillsList = new List<EmployeeSkill>();
+            //EmployeeSkillsList.Clear();
+
+            //foreach (var skill in _employeeSkillFake.EmployeeSkills)
+            //{
+            //    EmployeeSkillsList.Add(skill);
+            //    skill.AreaImgDownClicked = true;
+            //    skill.AreaImgUpClicked = false;
+            //    skill.TypeNameImgDown = false;
+            //    skill.TypeNameImgUp = false;
+            //}
             string s = "";
         }
 
