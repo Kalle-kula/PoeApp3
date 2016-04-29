@@ -18,6 +18,8 @@ namespace ConsultAdminSkills.ViewModel
         public int AreaId { get; set; }
         public string Area { get; set; }
         public int SkillId { get; set; }
+
+
         int employeeId = 3;
         //public EmployeeSkillViewModel()
         //{
@@ -26,65 +28,108 @@ namespace ConsultAdminSkills.ViewModel
 
         public async Task SetSkillLists()
         {
-            //Fyller på modellen(EmployeeSkill) från fejken(EmployeeSkillFake)
-
-            //_employeeSkillFake = new EmployeeSkillFake();
-            //_employeeSkillFake.EmployeeSkills.Add(new EmployeeSkill()
-            //{
-            //    EmployeeId = _employeeSkillFake.EmployeeId,
-            //    EmployeeFullName = _employeeSkillFake.EmployeeFullName,
-            //    SkillId = _employeeSkillFake.SkillId,
-            //    SkillName = _employeeSkillFake.SkillName,
-            //    TypeId = _employeeSkillFake.TypeId,
-            //    TypeName = _employeeSkillFake.TypeName,
-            //    AreaId = _employeeSkillFake.AreaId,
-            //    AreaName = _employeeSkillFake.AreaName,
-            //    Level = _employeeSkillFake.Level,
-            //    Comment = _employeeSkillFake.Comment,
-            //    LastUpdate = _employeeSkillFake.LastUpdate
-            //});
-
-            //var list = new List<EmployeeCompetence>(); <---EmployeeSkillsList
-            //foreach (var item in _employeeSkillFake.EmployeeAreaList)
-            //{
-            //    var competence = new EmployeeCompetence(item);
-            //    //var employeeCompetence = new EmployeeCompetence();
-            //    //employeeCompetence.EmployeeAreas = item;
-            //    //employeeCompetence.IsArea = true;
-            //    list.Add(competence);
-            //}
-
             EmployeeSkillsList = new List<EmployeeSkill>();
             _skillManager = new SkillManager();
             //EmployeeSkillsList.Clear();
             EmployeeSkillsList = await _skillManager.GetAllEmployeeSkills(employeeId);
 
-            
-            
             if (EmployeeSkillsList == null) return;
+
+            List<EmployeeAreas> allSkills = new List<EmployeeAreas>();
+
+            int typeId = 0;
+            int areaId = 0;
+            foreach (var skill in EmployeeSkillsList)
+            {
+                if (areaId != skill.AreaId)
+                {
+                    areaId = skill.AreaId;
+                    var area = WrapToEmployeeArea(skill);
+                    foreach (var innerSkill in EmployeeSkillsList.Where(x => x.AreaId == areaId))
+                    {
+                        if (typeId != innerSkill.TypeId)
+                        {
+                            typeId = innerSkill.TypeId;
+                            EmployeeTypes typeSkill = WrapToEmployeeTypes(innerSkill);
+
+                            foreach (var finalSkill in EmployeeSkillsList.Where(x => x.AreaId == areaId && x.TypeId == typeId))
+                            {
+                                typeSkill.EmployeeSkills.Add(WrapToEmployeeSkill(finalSkill));
+                            }
+                            area.EmployeeTypes.Add(typeSkill);
+                        }
+                    }
+                    allSkills.Add(area);
+                }
+            }
+
+            //List<string> list = new List<string>();
+
+            //foreach (var area in allSkills)
+            //{
+            //    list.Add(area.AreaName);
+            //    foreach (var item in area.EmployeeTypes)
+            //    {
+            //        list.Add(item.TypeName);
+            //        foreach (var item2 in item.EmployeeSkills)
+            //        {
+            //            list.Add(item2.SkillName);
+            //        }
+            //    }
+            //}
+
+            var plattLista = new List<EmployeeCompetence>();
+            foreach (var item in allSkills)
+            {
+                var competence = new EmployeeCompetence(item);
+                plattLista.Add(competence);
+            }
+
+            string t = "";
+
             foreach (var employeeSkill in EmployeeSkillsList)
             {
                 employeeSkill.EmployeeId = employeeId;
                 employeeSkill.AreaImgDownClicked = true;
-                
             }
-            //Här:
-
-            //Fyller EmployeeSkillCollection
-            //EmployeeSkillsList = new List<EmployeeSkill>();
-            //EmployeeSkillsList.Clear();
-
-            //foreach (var skill in _employeeSkillFake.EmployeeSkills)
-            //{
-            //    EmployeeSkillsList.Add(skill);
-            //    skill.AreaImgDownClicked = true;
-            //    skill.AreaImgUpClicked = false;
-            //    skill.TypeNameImgDown = false;
-            //    skill.TypeNameImgUp = false;
-            //}
             string s = "";
         }
 
+
+        #region Wrapper
+        private EmployeeAreas WrapToEmployeeArea(EmployeeSkill skill)
+        {
+            return new EmployeeAreas()
+            {
+                AreaName = skill.AreaName,
+                AreaId = skill.AreaId,
+                EmployeeTypes = new List<EmployeeTypes>()
+            };
+        }
+
+        private EmployeeTypes WrapToEmployeeTypes(EmployeeSkill innerSkill)
+        {
+            return new EmployeeTypes()
+            {
+                TypeName = innerSkill.TypeName,
+                TypeId = innerSkill.TypeId,
+                AreaId = innerSkill.AreaId,
+                EmployeeSkills = new List<EmployeeSkills>()
+            };
+        }
+
+        public EmployeeSkills WrapToEmployeeSkill(EmployeeSkill finalSkill)
+        {
+            return new EmployeeSkills()
+            {
+                SkillName = finalSkill.SkillName,
+                SkillId = finalSkill.SkillId,
+                Level = finalSkill.Level,
+                TypeId = finalSkill.TypeId
+            };
+        }
+
+        #endregion
         public void OpenTypeName(object param)
         {
             var imgClicked = param as EmployeeSkill;

@@ -10,25 +10,41 @@ namespace ConsultAdmin.Entities
     {
         public EmployeeCompetence()
         {
-            EmployeeAreas = new EmployeeArea();
-            EmployeeSubAreas = new EmployeeSubArea();
+            EmployeeAreas = new EmployeeAreas();
+            EmployeeTypes = new EmployeeTypes();
             EmployeeSkills = new EmployeeSkills();
         }
 
-        public EmployeeCompetence(EmployeeArea area)
+        public EmployeeCompetence(EmployeeAreas area)
         {
+            
             EmployeeAreas = area;
-            IsArea = true;
-            EmployeeSubAreas = new EmployeeSubArea();
-            EmployeeSkills = new EmployeeSkills();
-        }
-        //private List<EmployeeArea> _employeeAreas;
-        public EmployeeArea EmployeeAreas { get; set; }
-        public EmployeeSubArea EmployeeSubAreas { get; set; }
-        public EmployeeSkills EmployeeSkills { get; set; }
 
-        public bool IsArea { get; set; }
-        public bool IsSubArea { get; set; }
-        public bool IsSkill { get; set; }
+            EmployeeTypes = new EmployeeTypes();
+
+            foreach (var type in area.EmployeeTypes)
+            {
+                EmployeeTypes = type;
+            }
+            EmployeeSkills = new EmployeeSkills();
+
+            foreach (var skills in EmployeeTypes.EmployeeSkills)
+            {
+                EmployeeSkills = skills;
+            }
+
+
+        }
+        public EmployeeAreas EmployeeAreas { get; set; }
+        public EmployeeTypes EmployeeTypes { get; set; }
+        public EmployeeSkills EmployeeSkills { get; set; }
+        //private List<EmployeeArea> _employeeAreas;
+        //public EmployeeAreas EmployeeAreas { get; set; }
+        //public EmployeeSubArea EmployeeSubAreas { get; set; }
+        //public EmployeeSkills EmployeeSkills { get; set; }
+
+        //public bool IsArea { get; set; }
+        //public bool IsSubArea { get; set; }
+        //public bool IsSkill { get; set; }
     }
 }
