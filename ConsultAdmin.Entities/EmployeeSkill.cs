@@ -27,57 +27,57 @@ namespace ConsultAdmin.Entities
 
         
 
-        private bool _areaImgDownClicked;
-        private bool _areaImgUpClicked;
-        private bool _typeNameImgDown;
-        private bool _typeNameImgUp;
-        public bool AreaImgDownClicked
-        {
-            get { return _areaImgDownClicked; }
-            set
-            {
-                if (_areaImgDownClicked != value)
-                {
-                    SetPropertyField(nameof(AreaImgDownClicked), ref _areaImgDownClicked, value);
-                }
-            }
-        }
+        //private bool _areaImgDownClicked;
+        //private bool _areaImgUpClicked;
+        //private bool _typeNameImgDown;
+        //private bool _typeNameImgUp;
+        //public bool AreaImgDownClicked
+        //{
+        //    get { return _areaImgDownClicked; }
+        //    set
+        //    {
+        //        if (_areaImgDownClicked != value)
+        //        {
+        //            SetPropertyField(nameof(AreaImgDownClicked), ref _areaImgDownClicked, value);
+        //        }
+        //    }
+        //}
 
-        public bool AreaImgUpClicked
-        {
-            get { return _areaImgUpClicked; }
-            set
-            {
-                if (_areaImgUpClicked != value)
-                {
-                    SetPropertyField(nameof(AreaImgUpClicked), ref _areaImgUpClicked, value);
-                }
-            }
-        }
+        //public bool AreaImgUpClicked
+        //{
+        //    get { return _areaImgUpClicked; }
+        //    set
+        //    {
+        //        if (_areaImgUpClicked != value)
+        //        {
+        //            SetPropertyField(nameof(AreaImgUpClicked), ref _areaImgUpClicked, value);
+        //        }
+        //    }
+        //}
 
-        public bool TypeNameImgDown
-        {
-            get { return _typeNameImgDown; }
-            set
-            {
-                if (_typeNameImgDown != value)
-                {
-                    SetPropertyField(nameof(TypeNameImgDown), ref _typeNameImgDown, value);
-                }
-            }
-        }
+        //public bool TypeNameImgDown
+        //{
+        //    get { return _typeNameImgDown; }
+        //    set
+        //    {
+        //        if (_typeNameImgDown != value)
+        //        {
+        //            SetPropertyField(nameof(TypeNameImgDown), ref _typeNameImgDown, value);
+        //        }
+        //    }
+        //}
 
-        public bool TypeNameImgUp
-        {
-            get { return _typeNameImgUp; }
-            set
-            {
-                if (_typeNameImgUp != value)
-                {
-                    SetPropertyField(nameof(TypeNameImgUp), ref _typeNameImgUp, value);
-                }
-            }
-        }
+        //public bool TypeNameImgUp
+        //{
+        //    get { return _typeNameImgUp; }
+        //    set
+        //    {
+        //        if (_typeNameImgUp != value)
+        //        {
+        //            SetPropertyField(nameof(TypeNameImgUp), ref _typeNameImgUp, value);
+        //        }
+        //    }
+        //}
 
     }
 }

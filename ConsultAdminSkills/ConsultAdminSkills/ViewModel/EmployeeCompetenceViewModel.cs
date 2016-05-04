@@ -59,8 +59,40 @@ namespace ConsultAdminSkills.ViewModel
             if (skill == null) return;
             SkillName = skill.SkillName;
             Description = skill.Description;
+            SkillEmployees = skill.SkillEmployees;
+        }
 
-            //SkillEmployees = skill.SkillEmployees;
+        public async Task SetSkillList(int skillId)
+        {
+            _skillManager = new SkillManager();
+            Skill skill = await _skillManager.GetSkill(skillId);
+            if (skill == null) return;
+
+            //SkillLevelList, göra platt lista av skill.SkillEmployees
+            SkillEmployees = new List<EmployeeSkill>();
+            foreach (var skillList in skill.SkillEmployees)
+            {
+                SkillEmployees.Add(new EmployeeSkill()
+                {
+                    EmployeeFullName = skillList.EmployeeFullName,
+                    Level = skillList.Level
+                });
+            }
+            //SkillTreeList = new List<SkillTreeModel>();
+            //if (AllSkills == null) return;
+            //foreach (var area in AllSkills)
+            //{
+            //    SkillTreeList.Add(new SkillTreeModel()
+            //    {
+            //        AreaId = area.AreaId,
+            //        AreaName = area.AreaName,
+            //        Description = area.AreaName,
+            //        IsArea = true,
+            //        IsVisible = true,
+            //        IsExpanded = false,
+            //    });
+            //}
+            string s = "";
             //var list = new List<>
 
             //foreach (var list in SkillEmployees)
