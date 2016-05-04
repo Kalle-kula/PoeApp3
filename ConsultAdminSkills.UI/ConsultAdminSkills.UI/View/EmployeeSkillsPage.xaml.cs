@@ -43,24 +43,24 @@ namespace ConsultAdminSkills.UI.View
             _employeeSkillViewModel.OpenTypeName(imgClicked);
 
         }
-        private void AreaImgUpTapped(object sender, EventArgs e)
-        {
-            var eventArgsConvert = (TappedEventArgs)e;
-            var imgClicked = eventArgsConvert.Parameter;
-            _employeeSkillViewModel.CloseTypeName(imgClicked);
-        }
+        //private void AreaImgUpTapped(object sender, EventArgs e)
+        //{
+        //    var eventArgsConvert = (TappedEventArgs)e;
+        //    var imgClicked = eventArgsConvert.Parameter;
+        //    _employeeSkillViewModel.CloseTypeName(imgClicked);
+        //}
         private void TypeNameImgDownTapped(object sender, EventArgs e)
         {
             var eventArgsConvert = (TappedEventArgs)e;
             var imgClicked = eventArgsConvert.Parameter;
             _employeeSkillViewModel.OpenSkillName(imgClicked);
         }
-        private void TypeNameImgUpTapped(object sender, EventArgs e)
-        {
-            var eventArgsConvert = (TappedEventArgs)e;
-            var imgClicked = eventArgsConvert.Parameter;
-            _employeeSkillViewModel.CloseSkillName(imgClicked);
-        }
+        //private void TypeNameImgUpTapped(object sender, EventArgs e)
+        //{
+        //    var eventArgsConvert = (TappedEventArgs)e;
+        //    var imgClicked = eventArgsConvert.Parameter;
+        //    _employeeSkillViewModel.CloseSkillName(imgClicked);
+        //}
         private void SkillTapped(object sender, EventArgs e)
         {
             

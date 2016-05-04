@@ -45,10 +45,12 @@
     <Compile Include="EmployeeSkills.cs" />
     <Compile Include="EmployeeCompetence.cs" />
     <Compile Include="EmployeeSubArea.cs" />
+    <Compile Include="EmployeeType.cs" />
     <Compile Include="EmployeeTypes.cs" />
     <Compile Include="PhysicalAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Skill.cs" />
+    <Compile Include="SkillTreeModel.cs" />
     <Compile Include="VirtualAddress.cs" />
   </ItemGroup>
   <ItemGroup>
