@@ -23,11 +23,23 @@ namespace ConsultAdmin.Entities
         private bool _isType;
         private bool _isSkill;
         private bool _isTypeClicked;
+        private bool _isAreaClicked;
         private bool _areaImgDownClicked;
         private bool _areaImgUpClicked;
         private bool _typeNameImgDown;
         private bool _typeNameImgUp;
 
+        public bool IsAreaClicked
+        {
+            get { return _isAreaClicked; }
+            set
+            {
+                if (_isAreaClicked != value)
+                {
+                    SetPropertyField(nameof(IsAreaClicked), ref _isAreaClicked, value);
+                }
+            }
+        }
         public bool IsTypeClicked
         {
             get { return _isTypeClicked; }

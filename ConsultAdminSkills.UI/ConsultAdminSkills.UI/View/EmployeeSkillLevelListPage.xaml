@@ -4,14 +4,25 @@
              x:Class="ConsultAdminSkills.UI.View.EmployeeSkillLevelListPage">
 
   <ContentPage.Content>
-
+    <!--<Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Label Grid.Row="0" Grid.Column="0" Text="Hej" HorizontalOptions="Center" FontAttributes="Bold"/>
+    </Grid>-->
+    
+    
     <ListView ItemsSource="{Binding SkillEmployees}" HasUnevenRows="True">
       <!--ItemTapped="EmployeeSkillList_OnItemTapped"-->
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
             <ViewCell.View>
-              <Grid>
+              <Grid Padding="15">
                 <Grid.RowDefinitions>
                   <RowDefinition Height="Auto" />
                   <RowDefinition Height="Auto" />
@@ -32,7 +43,7 @@
 
                 <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="6" Text="{Binding EmployeeFullName}" FontSize="15"/>
 
-                <Label Grid.Row="" Grid.Column="7" Text="{Binding Level}" FontSize="15"/>
+                <Label Grid.Row="0" Grid.Column="7" Text="{Binding Level}" FontSize="15"/>
 
               </Grid>
             </ViewCell.View>
@@ -40,7 +51,6 @@
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
-
   </ContentPage.Content>
 
 </ContentPage>

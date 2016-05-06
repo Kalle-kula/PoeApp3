@@ -161,6 +161,7 @@ namespace ConsultAdminSkills.ViewModel
             {
                 // Visa eller dölj underobjekten. (types
                 type.IsVisible = list.IsExpanded;
+                type.IsAreaClicked = list.IsExpanded;
 
                 // Visa bara underobjekten (Skills) om både area och type är expanderade
                 var isVisible = type.IsExpanded && type.IsVisible;
