@@ -16,8 +16,12 @@ namespace ConsultAdminSkills.UI
          public AppUI()
         {
             // The root page of your application
-            MainPage = new EmployeeSkillsPage();
-            //MainPage = new EmployeeTabbedRootPage();
+
+            //MainPage = new EmployeeSkillsPage();
+
+            MainPage = new EmployeeListViewPage();
+
+            //MainPage = new SkillsListPage();
 
         }
 

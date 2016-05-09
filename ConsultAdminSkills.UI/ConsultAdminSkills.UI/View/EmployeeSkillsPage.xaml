@@ -4,10 +4,20 @@
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              x:Class="ConsultAdminSkills.UI.View.EmployeeSkillsPage">
 
-  <ContentPage.ToolbarItems>
+  <ContentPage.ToolbarItems IsVisible="IsSameUser">
     <ToolbarItem Clicked="ToolbarItem_Edit" Order="Primary" Priority="0">
       <ToolbarItem.Icon>
-        <OnPlatform x:TypeArguments="FileImageSource" Android="pencil32.png" />
+        <OnPlatform x:TypeArguments="FileImageSource" Android="ic_edit_white_18dp.png"/>
+      </ToolbarItem.Icon>
+    </ToolbarItem>
+  <ToolbarItem Clicked="ToolbarItem_Add" Order="Primary" Priority="1">
+      <ToolbarItem.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource" Android="ic_add_white_18dp.png" />
+      </ToolbarItem.Icon>
+    </ToolbarItem>
+  <ToolbarItem Clicked="ToolbarItem_Delete" Order="Primary" Priority="2">
+      <ToolbarItem.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource" Android="ic_delete_white_18dp.png" />
       </ToolbarItem.Icon>
     </ToolbarItem>
   </ContentPage.ToolbarItems>

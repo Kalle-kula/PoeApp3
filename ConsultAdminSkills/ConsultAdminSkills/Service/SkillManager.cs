@@ -55,6 +55,46 @@ namespace ConsultAdminSkills.Service
             return employeeSkills;
         }
 
+        public async Task<List<Skill>> GetAllSkills()
+        {
+            List<Skill> skills = new List<Skill>();
+
+            //var handle = Insights.TrackTime("Time_GetAllEmployees");
+            //handle.Start();
+
+            try
+            {
+                HttpClient client = new HttpClient();
+
+                // Set pref result as JSON
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // Call the API for contacts
+                Task<string> contentsTask = client.GetStringAsync(Url + "Skill");
+
+                // await! control returns to the caller and the task continues to run on another thread
+                string contents = await contentsTask.ConfigureAwait(false);
+
+                // Deserialize the JSON data into ContactManager (List of contacts)
+                skills = JsonConvert.DeserializeObject<List<Skill>>(contents);
+            }
+            catch (Exception ex)
+            {
+                //Dictionary<string, string> myDictionary = new Dictionary<string, string>
+                //{
+                //    {"Function", "EmployeeManager.GetAllEmployees"}
+                //};
+                //_logger.LoggError(ex, myDictionary, (Xamarin.Insights.Severity.Error));
+            }
+            finally
+            {
+                // Stop the GetAllEmployees-timer
+                //handle.Stop();
+            }
+
+            return skills;
+        }
+
         public async Task<Skill> GetSkill(int id)
         {
             Skill skill = new Skill();

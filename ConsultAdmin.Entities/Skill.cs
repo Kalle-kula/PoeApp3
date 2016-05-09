@@ -16,6 +16,7 @@ namespace ConsultAdmin.Entities
 
         public int SkillId { get; set; }
         public string SkillName { get; set; }
+        public int Level { get; set; }
 
 
         public string Description { get; set; }

@@ -13,17 +13,22 @@ namespace ConsultAdminSkills.UI.View
     {
         //private EmployeeViewModel _employeeViewModel;
         private EmployeeSkillViewModel _employeeSkillViewModel;
-        public EmployeeSkillsPage()
+        //private EmployeeViewModel _employeeViewModel;
+        private int employeeId;
+        public EmployeeSkillsPage(EmployeeViewModel employeeViewModel)
         {
             InitializeComponent();
             _employeeSkillViewModel = new EmployeeSkillViewModel();
             BindingContext = _employeeSkillViewModel;
+            var model = employeeViewModel;
+            employeeId = model.EmployeeId;
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await _employeeSkillViewModel.SetSkillLists();
+            _employeeSkillViewModel.VerfifyUser(employeeId);
+            await _employeeSkillViewModel.SetEmployeeSkillLists(employeeId);
         }
 
         //private void EmployeeSkillList_OnItemTapped(object sender, ItemTappedEventArgs e)
@@ -33,6 +38,16 @@ namespace ConsultAdminSkills.UI.View
         //}
 
         private void ToolbarItem_Edit(object sender, EventArgs e)
+        {
+            //Device.BeginInvokeOnMainThread(() => Navigation.PushAsync(new EmployeeGeneralEditPage(_Navigation)));
+        }
+
+        private void ToolbarItem_Add(object sender, EventArgs e)
+        {
+            //Device.BeginInvokeOnMainThread(() => Navigation.PushAsync(new EmployeeGeneralEditPage(_Navigation)));
+        }
+
+        private void ToolbarItem_Delete(object sender, EventArgs e)
         {
             //Device.BeginInvokeOnMainThread(() => Navigation.PushAsync(new EmployeeGeneralEditPage(_Navigation)));
         }
@@ -63,7 +78,7 @@ namespace ConsultAdminSkills.UI.View
         //}
         private void SkillTapped(object sender, EventArgs e)
         {
-            
+
             var eventArgsConvert = (TappedEventArgs)e;
             var skillClicked = eventArgsConvert.Parameter;
             int skillId = _employeeSkillViewModel.GetSkillId(skillClicked);

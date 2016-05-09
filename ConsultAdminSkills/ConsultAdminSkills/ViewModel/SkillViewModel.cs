@@ -1,41 +1,24 @@
 ﻿using ConsultAdmin.Entities;
-using ConsultAdminSkills.Fake;
 using ConsultAdminSkills.Service;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsultAdminSkills.ViewModel
 {
-    public class EmployeeSkillViewModel : BaseViewModel
+    public class SkillViewModel : BaseViewModel
     {
-
-        //private EmployeeSkillFake _employeeSkillFake;
         private SkillManager _skillManager;
-        public int AreaId { get; set; }
-        public string Area { get; set; }
-        public int SkillId { get; set; }
-        private SkillTreeModel _skillTreeModel;
-        private EmployeeSkill _employeeSkill;
-        //int employeeId = 3; //fake för inloggad person
+        private Skill _skill;
+        public List<EmployeeAreas> AllSkills { get; set; }
 
-        public void VerfifyUser(int employeeId)
+        public async Task SetSkillLists()
         {
-            //Här kollas om den klickade employeen är samma som den inloggade (visar CRUD-funktioner i toolbaren)
-            if (employeeId == 3)
-            {
-                IsSameUser = true;
-            }
-        }
-
-        public async Task SetEmployeeSkillLists(int employeeId)
-        {
-            EmployeeSkillsList = new List<EmployeeSkill>();
+            SkillsList = new List<Skill>();
             _skillManager = new SkillManager();
-            EmployeeSkillsList = await _skillManager.GetAllEmployeeSkills(employeeId);
+            SkillsList = await _skillManager.GetAllSkills();
 
             CreateHierarchyList();
             CreateFlatList();
@@ -43,27 +26,27 @@ namespace ConsultAdminSkills.ViewModel
 
         public void CreateHierarchyList()
         {
-            if (EmployeeSkillsList == null) return;
+            if (SkillsList == null) return;
 
             AllSkills = new List<EmployeeAreas>();
 
             int typeId = 0;
             int areaId = 0;
-            foreach (var skill in EmployeeSkillsList)
+            foreach (var skill in SkillsList)
             {
                 if (areaId != skill.AreaId)
                 {
                     areaId = skill.AreaId;
                     var area = WrapToEmployeeArea(skill);
-                    foreach (var innerSkill in EmployeeSkillsList.Where(x => x.AreaId == areaId))
+                    foreach (var innerSkill in SkillsList.Where(x => x.AreaId == areaId))
                     {
                         if (typeId != innerSkill.TypeId)
                         {
                             typeId = innerSkill.TypeId;
                             EmployeeTypes typeSkill = WrapToEmployeeTypes(innerSkill);
 
-                            foreach (var finalSkill in EmployeeSkillsList.Where(x => x.AreaId == areaId && x.TypeId == typeId))
-                            {   
+                            foreach (var finalSkill in SkillsList.Where(x => x.AreaId == areaId && x.TypeId == typeId))
+                            {
                                 typeSkill.EmployeeSkills.Add(WrapToEmployeeSkill(finalSkill));
                             }
                             area.EmployeeTypes.Add(typeSkill);
@@ -76,7 +59,7 @@ namespace ConsultAdminSkills.ViewModel
         }
 
         #region Wrapper
-        private EmployeeAreas WrapToEmployeeArea(EmployeeSkill skill)
+        private EmployeeAreas WrapToEmployeeArea(Skill skill)
         {
             return new EmployeeAreas()
             {
@@ -86,7 +69,7 @@ namespace ConsultAdminSkills.ViewModel
             };
         }
 
-        private EmployeeTypes WrapToEmployeeTypes(EmployeeSkill innerSkill)
+        private EmployeeTypes WrapToEmployeeTypes(Skill innerSkill)
         {
             return new EmployeeTypes()
             {
@@ -97,7 +80,7 @@ namespace ConsultAdminSkills.ViewModel
             };
         }
 
-        public EmployeeSkills WrapToEmployeeSkill(EmployeeSkill finalSkill)
+        public EmployeeSkills WrapToEmployeeSkill(Skill finalSkill)
         {
             return new EmployeeSkills()
             {
@@ -133,7 +116,7 @@ namespace ConsultAdminSkills.ViewModel
                         TypeName = type.TypeName,
                         Description = type.TypeName,
                         IsType = true,
-                        
+
                     });
                     foreach (var skill in type.EmployeeSkills)
                     {
@@ -215,19 +198,6 @@ namespace ConsultAdminSkills.ViewModel
             return skillId;
         }
 
-        private bool _isSameUser;
-        public bool IsSameUser
-        {
-            get { return _isSameUser; }
-            set
-            {
-                if (_isSameUser != value)
-                {
-                    SetPropertyField(nameof(IsSameUser), ref _isSameUser, value);
-                }
-            }
-        }
-
         private List<SkillTreeModel> _skillTreeList;
         public List<SkillTreeModel> SkillTreeList
         {
@@ -241,33 +211,8 @@ namespace ConsultAdminSkills.ViewModel
             }
         }
 
-        private List<EmployeeSkill> _employeeSkillsList;
-        public List<EmployeeSkill> EmployeeSkillsList
-        {
-            get { return _employeeSkillsList; }
-            set
-            {
-                if (_employeeSkillsList != value)
-                {
-                    SetPropertyField(nameof(EmployeeSkillsList), ref _employeeSkillsList, value);
-                }
-            }
-        }
-
-        private List<EmployeeAreas> _allSkills;
-        public List<EmployeeAreas> AllSkills
-        {
-            get { return _allSkills; }
-            set
-            {
-                if (_allSkills != value)
-                {
-                    SetPropertyField(nameof(AllSkills), ref _allSkills, value);
-                }
-            }
-        }
-
         private List<Skill> _skillsList;
+
         public List<Skill> SkillsList
         {
             get { return _skillsList; }
@@ -279,6 +224,5 @@ namespace ConsultAdminSkills.ViewModel
                 }
             }
         }
-
     }
 }

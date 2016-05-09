@@ -179,6 +179,9 @@
     <AndroidResource Include="Resources\drawable\ic_keyboard_arrow_down_white_18dp.png" />
     <AndroidResource Include="Resources\drawable\ic_keyboard_arrow_up_white_18dp.png" />
     <AndroidResource Include="Resources\drawable\ic_chevron.png" />
+    <AndroidResource Include="Resources\drawable\ic_add_white_18dp.png" />
+    <AndroidResource Include="Resources\drawable\ic_delete_white_18dp.png" />
+    <AndroidResource Include="Resources\drawable\ic_edit_white_18dp.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ConsultAdmin.Entities\ConsultAdmin.Entities.csproj">
