@@ -4,7 +4,7 @@
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              x:Class="ConsultAdminSkills.UI.View.EmployeeSkillsPage">
 
-  <ContentPage.ToolbarItems IsVisible="IsSameUser">
+  <ContentPage.ToolbarItems IsVisible="{Binding IsSameUser}">
     <ToolbarItem Clicked="ToolbarItem_Edit" Order="Primary" Priority="0">
       <ToolbarItem.Icon>
         <OnPlatform x:TypeArguments="FileImageSource" Android="ic_edit_white_18dp.png"/>

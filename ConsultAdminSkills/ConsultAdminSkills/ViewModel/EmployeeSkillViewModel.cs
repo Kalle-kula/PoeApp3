@@ -1,5 +1,6 @@
 ﻿using ConsultAdmin.Entities;
 using ConsultAdminSkills.Fake;
+using ConsultAdminSkills.Model;
 using ConsultAdminSkills.Service;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace ConsultAdminSkills.ViewModel
         public void VerfifyUser(int employeeId)
         {
             //Här kollas om den klickade employeen är samma som den inloggade (visar CRUD-funktioner i toolbaren)
-            if (employeeId == 3)
+            if (employeeId == CurrentUser.EmployeeId)
             {
                 IsSameUser = true;
             }

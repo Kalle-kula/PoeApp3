@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ConsultAdminSkills.UI.View.MenuPage">
+             x:Class="ConsultAdminSkills.UI.View.MenuPage"
              Icon="ic_menu_white_48dp.png"
              Title="Master"
              BackgroundColor="#e6e6e6"
