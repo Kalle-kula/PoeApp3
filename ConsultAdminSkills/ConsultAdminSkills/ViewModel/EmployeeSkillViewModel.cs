@@ -281,5 +281,16 @@ namespace ConsultAdminSkills.ViewModel
             }
         }
 
+        private int _areaIndex;
+        public int AreaIndex
+        {
+            get { return _areaIndex; }
+            set
+            {
+                if (_areaIndex != value)
+                SetPropertyField(nameof(AreaIndex), ref _areaIndex, value);
+            }
+        }
+
     }
 }

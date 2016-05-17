@@ -44,7 +44,7 @@ namespace ConsultAdminSkills.UI.View
 
         private void ToolbarItem_Add(object sender, EventArgs e)
         {
-            //Device.BeginInvokeOnMainThread(() => Navigation.PushAsync(new EmployeeGeneralEditPage(_Navigation)));
+            //Device.BeginInvokeOnMainThread(() => Navigation.PushAsync(new AddCompetencePage(employeeId)));
         }
 
         private void ToolbarItem_Delete(object sender, EventArgs e)

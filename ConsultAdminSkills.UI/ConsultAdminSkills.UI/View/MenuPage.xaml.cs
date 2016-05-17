@@ -36,5 +36,11 @@ namespace ConsultAdminSkills.UI.View
             }
             DependencyService.Get<IApplicationUtilities>().CloseApp();
         }
+        private void MenuLatest_OnClicked(object sender, EventArgs e)
+        {
+            AppUI.MasterDetailPage.Detail = new NavigationPage(new AddCompetencePage());
+            AppUI.MasterDetailPage.IsPresented = false;
+        }
+        
     }
 }

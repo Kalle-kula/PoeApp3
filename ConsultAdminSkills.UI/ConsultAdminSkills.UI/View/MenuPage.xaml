@@ -12,6 +12,8 @@
       <Button x:Name="MenuHome" Text="View all employees" Clicked="Emp_OnClicked" BackgroundColor="Transparent" TextColor="Black" FontSize="20" HorizontalOptions="Start" />
       <Button x:Name="MenuEmployees" Text="View all competences" Clicked="Comp_OnClicked" BackgroundColor="Transparent" TextColor="Black" FontSize="20" HorizontalOptions="Start" />
       <Button x:Name="MenuLogout" Text="Close (logout)" Clicked="MenuLogout_OnClicked" BackgroundColor="Transparent" TextColor="Black" FontSize="20" HorizontalOptions="Start" />
+      <Button x:Name="MenuLatest" Text="Senaste sidan" Clicked="MenuLatest_OnClicked" BackgroundColor="Transparent" TextColor="Black" FontSize="20" HorizontalOptions="Start" />
+
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
