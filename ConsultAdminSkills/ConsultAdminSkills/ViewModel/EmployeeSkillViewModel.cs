@@ -23,6 +23,77 @@ namespace ConsultAdminSkills.ViewModel
         private EmployeeSkill _employeeSkill;
         //int employeeId = 3; //fake för inloggad person
 
+        //AddCompetencePage
+
+        public List<string> AreaNameList { get; set; }
+        public List<string> TypeNameList { get; set; }
+        public async Task LoadSkills()
+        {
+            _skillManager = new SkillManager();
+            SkillsList = new List<Skill>();
+            SkillsList = await _skillManager.GetAllSkills();
+
+            AreaNameList = new List<string>();
+
+            if (SkillsList != null && SkillsList.Count > 0)
+            {
+                AreaNameList.AddRange(SkillsList.Select(x => x.AreaName).Distinct());
+                var areaList = SkillsList.FirstOrDefault();
+
+                List<string> TypeList = new List<string>();
+
+                if (areaList != null)
+                {
+                    foreach (var areaName in SkillsList)
+                    {
+                        if (areaName.AreaName == areaList.AreaName)
+                            TypeList.Add(areaName.AreaName); 
+                    } 
+                }
+                TypeList.AddRange(SkillsList.Where(x => x.AreaName == SkillsList.FirstOrDefault().AreaName).Select(x => x.TypeName)); // gör inte listan distinct!
+
+                var firstType = TypeList.FirstOrDefault();
+                var matchingTypes = SkillsList.Where(x => x.AreaName == firstType).ToList();
+                var type = matchingTypes.Select(x => x.TypeName).Distinct();
+
+                TypeNameList = new List<string>();
+                foreach (var typeName in type)
+                {
+                    TypeNameList.Add(typeName);
+                }
+            }
+        }
+
+        private int _areaIndex;
+        public int AreaIndex
+        {
+            get { return _areaIndex; }
+            set
+            {
+                if (_areaIndex != value)
+                    SetPropertyField(nameof(AreaIndex), ref _areaIndex, value);
+            }
+        }
+
+        public void AreaIndexChanged(int index)
+        {
+            if (SkillsList.Count < index) return;
+            var selectedArea = AreaNameList[index];
+            var matchingArea = SkillsList.Where(x => x.AreaName == selectedArea).ToList();
+            var type = matchingArea.Select(x => x.TypeName).Distinct();
+            TypeNameList.Clear();
+
+            TypeNameList = new List<string>();
+
+            if (type == null) return;
+            {
+                foreach (var typeName in type)
+                {
+                    TypeNameList.Add(typeName);
+                }
+            }
+        }
+
         public void VerfifyUser(int employeeId)
         {
             //Här kollas om den klickade employeen är samma som den inloggade (visar CRUD-funktioner i toolbaren)
@@ -281,16 +352,7 @@ namespace ConsultAdminSkills.ViewModel
             }
         }
 
-        private int _areaIndex;
-        public int AreaIndex
-        {
-            get { return _areaIndex; }
-            set
-            {
-                if (_areaIndex != value)
-                SetPropertyField(nameof(AreaIndex), ref _areaIndex, value);
-            }
-        }
+        
 
     }
 }

@@ -18,16 +18,59 @@ namespace ConsultAdminSkills.UI.View
         {
             InitializeComponent();
             EmployeeId = 3;
+            _employeeSkillViewModel = new EmployeeSkillViewModel();
+            CreateAreaNameList();
+
+            
             BindingContext = _employeeSkillViewModel;
 
         }
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            _employeeSkillViewModel = new EmployeeSkillViewModel();
-            await _employeeSkillViewModel.SetEmployeeSkillLists(EmployeeId);
+            SetAreaPicker();
+            //await SetAreaPicker();
+            //_employeeSkillViewModel = new EmployeeSkillViewModel();
+            //await _employeeSkillViewModel.SetEmployeeSkillLists(EmployeeId);
             //    //_employeeSkillViewModel.VerfifyUser(employeeId);
             //    //await _employeeSkillViewModel.SetEmployeeSkillLists(employeeId);
-            }
         }
+
+        private async void CreateAreaNameList()
+        {
+            await _employeeSkillViewModel.LoadSkills();
+
+            foreach (var areaName in _employeeSkillViewModel.AreaNameList)
+            {
+                AreaPicker.Items.Add(areaName);
+            }
+
+            foreach (var typeName in _employeeSkillViewModel.TypeNameList)
+            {
+                TypePicker.Items.Add(typeName);
+            }
+
+            AreaPicker.SelectedIndex = 0;
+        }
+
+        private void SetAreaPicker()
+        {
+            AreaPicker.SelectedIndexChanged += (sender, args) =>
+            {
+                _employeeSkillViewModel.AreaIndexChanged(AreaPicker.SelectedIndex);
+
+                TypePicker.Items.Clear();
+
+                foreach (var typeName in _employeeSkillViewModel.TypeNameList)
+                {
+                    TypePicker.Items.Add(typeName);
+                }
+
+                if (TypePicker.Items.Any())
+                {
+                    TypePicker.SelectedIndex = 0;
+                }
+            };
+        }
+    }
 }
