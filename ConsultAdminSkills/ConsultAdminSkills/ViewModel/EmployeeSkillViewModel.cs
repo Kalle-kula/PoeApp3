@@ -33,6 +33,10 @@ namespace ConsultAdminSkills.ViewModel
             {
                 IsSameUser = true;
             }
+            else
+            {
+                IsSameUser = false;
+            }
         }
 
         public async Task SetEmployeeSkillLists(int employeeId)
@@ -450,15 +454,15 @@ namespace ConsultAdminSkills.ViewModel
 
         }
 
-        public void SaveAndEditCompetence()
+        public async void SaveAndEditCompetence()
         {
             var selectedSkill = SkillNameList[SkillIndex];
             var matchingSkill = AllSkillsList.FirstOrDefault(x => x.SkillName == selectedSkill);
 
             _employeeSkill = new EmployeeSkill()
             {
-                EmployeeId = 92,//CurrentUser.EmployeeId,
-                EmployeeFullName = "Kalle Hallert", //CurrentUser.FullName,
+                EmployeeId = CurrentUser.EmployeeId, //92,//
+                EmployeeFullName = CurrentUser.FullName, //"Kalle Hallert", //
                 SkillId = matchingSkill.SkillId,
                 SkillName = matchingSkill.SkillName,
                 TypeId = matchingSkill.TypeId,
@@ -469,13 +473,14 @@ namespace ConsultAdminSkills.ViewModel
                 Comment = string.Empty,
                 LastUpdate = DateTime.Now
             };
-
         }
 
         public async Task AddCompetence()
         {
             SaveAndEditCompetence();
+            _employeeSkillManager = new EmployeeSkillManager();
             await _employeeSkillManager.SaveSkill(_employeeSkill);
+
         }
     }
 }

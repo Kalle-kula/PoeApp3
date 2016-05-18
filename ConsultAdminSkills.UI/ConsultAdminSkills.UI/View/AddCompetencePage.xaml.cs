@@ -15,15 +15,13 @@ namespace ConsultAdminSkills.UI.View
         private int EmployeeId;
         private List<int> SkillLevelList = new List<int>();
 
-        public AddCompetencePage()
+        public AddCompetencePage(int id)
         //int id
         {
             InitializeComponent();
-            EmployeeId = 92;
+            EmployeeId = id;
             _employeeSkillViewModel = new EmployeeSkillViewModel();
             CreateAreaNameList();
-
-
             BindingContext = _employeeSkillViewModel;
 
         }
@@ -126,7 +124,7 @@ namespace ConsultAdminSkills.UI.View
             try
             {
                 await _employeeSkillViewModel.AddCompetence();
-                SaveSuccessText.Text = "Competence have been saved";
+                SaveSuccessText.Text = "Competence has been saved";
 
             }
             catch (Exception)

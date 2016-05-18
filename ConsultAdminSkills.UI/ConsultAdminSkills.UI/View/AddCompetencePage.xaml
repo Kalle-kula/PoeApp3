@@ -54,7 +54,7 @@
 
       <Button Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="4" Text="Save" Clicked="SaveButton_Clicked"/>
 
-      <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="8" x:Name="SaveSuccessText"/>
+      <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="8" x:Name="SaveSuccessText" HorizontalOptions="Center"/>
     </Grid>
     </ScrollView>
   </ContentPage.Content>

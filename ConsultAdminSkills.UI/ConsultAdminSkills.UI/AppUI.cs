@@ -37,9 +37,9 @@ namespace ConsultAdminSkills.UI
             var loginViewModel = new LoginViewModel();
             loginViewModel.PropertyChanged += LoginViewModel_PropertyChanged;
 
-            //MainPage = new LoginPage(loginViewModel);   //<-- Enabla sen
+            MainPage = new LoginPage(loginViewModel);   //<-- Enabla sen
 
-            MainPage = new AddCompetencePage();  //<--Ta bort sen
+            //MainPage = new AddCompetencePage();  //<--Ta bort sen
 
         }
 

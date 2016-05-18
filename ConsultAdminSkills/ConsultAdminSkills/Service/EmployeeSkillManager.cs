@@ -14,7 +14,8 @@ namespace ConsultAdminSkills.Service
     {
         public async Task SaveSkill(EmployeeSkill employeeSkill)
         {
-            string uri = $"http://consultadminwebserver.azurewebsites.net/api/EmployeeSkill/{employeeSkill.SkillId}";
+            string uri = $"http://consultadminwebserver.azurewebsites.net/api/EmployeeSkill/";
+            //{employeeSkill.SkillId}
 
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -22,7 +23,7 @@ namespace ConsultAdminSkills.Service
             try
             {
                 var requestJSON = JsonConvert.SerializeObject(employeeSkill);
-                await httpClient.PutAsync(uri,
+                await httpClient.PostAsync(uri,
                 new StringContent(requestJSON.ToString(), Encoding.UTF8, "application/json"));
             }
             catch (Exception ex)
