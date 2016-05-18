@@ -27,40 +27,56 @@ namespace ConsultAdminSkills.ViewModel
 
         public List<string> AreaNameList { get; set; }
         public List<string> TypeNameList { get; set; }
+        public List<string> SkillNameList { get; set; }
         public async Task LoadSkills()
         {
             _skillManager = new SkillManager();
-            SkillsList = new List<Skill>();
-            SkillsList = await _skillManager.GetAllSkills();
+            AllSkillsList = new List<Skill>();
+            AllSkillsList = await _skillManager.GetAllSkills();
 
             AreaNameList = new List<string>();
 
-            if (SkillsList != null && SkillsList.Count > 0)
+            if (AllSkillsList != null && AllSkillsList.Count > 0)
             {
-                AreaNameList.AddRange(SkillsList.Select(x => x.AreaName).Distinct());
-                var areaList = SkillsList.FirstOrDefault();
+                AreaNameList.AddRange(AllSkillsList.Select(x => x.AreaName).Distinct());
+                var areaList = AllSkillsList.FirstOrDefault();
 
                 List<string> TypeList = new List<string>();
 
                 if (areaList != null)
                 {
-                    foreach (var areaName in SkillsList)
+                    foreach (var areaName in AllSkillsList)
                     {
                         if (areaName.AreaName == areaList.AreaName)
                             TypeList.Add(areaName.AreaName); 
                     } 
                 }
-                TypeList.AddRange(SkillsList.Where(x => x.AreaName == SkillsList.FirstOrDefault().AreaName).Select(x => x.TypeName)); // gör inte listan distinct!
+                TypeList.AddRange(AllSkillsList.Where(x => x.AreaName == AllSkillsList.FirstOrDefault().AreaName).Select(x => x.TypeName)); 
 
                 var firstType = TypeList.FirstOrDefault();
-                var matchingTypes = SkillsList.Where(x => x.AreaName == firstType).ToList();
+                var matchingTypes = AllSkillsList.Where(x => x.AreaName == firstType).ToList();
                 var type = matchingTypes.Select(x => x.TypeName).Distinct();
 
                 TypeNameList = new List<string>();
+                List<string> SkillList = new List<string>();
+
                 foreach (var typeName in type)
                 {
                     TypeNameList.Add(typeName);
+                    SkillList.Add(typeName);
                 }
+
+                SkillList.AddRange(AllSkillsList.Where(x => x.TypeName == AllSkillsList.FirstOrDefault().TypeName).Select(x => x.TypeName));
+                var firstSkill = SkillList.FirstOrDefault();
+                var matchingSkills = AllSkillsList.Where(x => x.TypeName == firstSkill).ToList();
+                var skill = matchingSkills.Select(x => x.SkillName).Distinct();
+
+                SkillNameList = new List<string>();
+                foreach (var skillName in skill)
+                {
+                    SkillNameList.Add(skillName);
+                }
+
             }
         }
 
@@ -75,11 +91,33 @@ namespace ConsultAdminSkills.ViewModel
             }
         }
 
+        private int _typeIndex;
+        public int TypeIndex
+        {
+            get { return _typeIndex; }
+            set
+            {
+                if (_typeIndex != value)
+                    SetPropertyField(nameof(TypeIndex), ref _typeIndex, value);
+            }
+        }
+
+        private int _skillIndex;
+        public int SkillIndex
+        {
+            get { return _skillIndex; }
+            set
+            {
+                if (_skillIndex != value)
+                    SetPropertyField(nameof(SkillIndex), ref _skillIndex, value);
+            }
+        }
+
         public void AreaIndexChanged(int index)
         {
-            if (SkillsList.Count < index) return;
+            if (AllSkillsList.Count < index) return;
             var selectedArea = AreaNameList[index];
-            var matchingArea = SkillsList.Where(x => x.AreaName == selectedArea).ToList();
+            var matchingArea = AllSkillsList.Where(x => x.AreaName == selectedArea).ToList();
             var type = matchingArea.Select(x => x.TypeName).Distinct();
             TypeNameList.Clear();
 
@@ -90,6 +128,25 @@ namespace ConsultAdminSkills.ViewModel
                 foreach (var typeName in type)
                 {
                     TypeNameList.Add(typeName);
+                }
+            }
+        }
+
+        public void TypeIndexChanged(int index)
+        {
+            if (AllSkillsList.Count < index) return;
+            var selectedType = TypeNameList[index];
+            var matchingType = AllSkillsList.Where(x => x.TypeName == selectedType).ToList();
+            var skill = matchingType.Select(x => x.SkillName).Distinct();
+            TypeNameList.Clear();
+
+            SkillNameList = new List<string>();
+
+            if (skill == null) return;
+            {
+                foreach (var skillName in skill)
+                {
+                    SkillNameList.Add(skillName);
                 }
             }
         }
@@ -340,14 +397,14 @@ namespace ConsultAdminSkills.ViewModel
         }
 
         private List<Skill> _skillsList;
-        public List<Skill> SkillsList
+        public List<Skill> AllSkillsList
         {
             get { return _skillsList; }
             set
             {
                 if (_skillsList != value)
                 {
-                    SetPropertyField(nameof(SkillsList), ref _skillsList, value);
+                    SetPropertyField(nameof(AllSkillsList), ref _skillsList, value);
                 }
             }
         }

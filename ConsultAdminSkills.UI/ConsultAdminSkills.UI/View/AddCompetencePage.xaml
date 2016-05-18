@@ -8,7 +8,7 @@
 
   <ContentPage.Content>
 
-    <Grid>
+    <Grid Padding="20">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="Auto"/>
@@ -30,24 +30,25 @@
 
       </Grid.ColumnDefinitions>
 
-      <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Area" />
-      <Picker Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="4" x:Name="AreaPicker" SelectedIndex="{Binding AreaIndex}"/>
-      <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="4" Text="{Binding AreaName}"/>
+      <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Area" VerticalOptions="Center" FontSize="18"/>
+      <Picker Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="5" x:Name="AreaPicker" SelectedIndex="{Binding AreaIndex}"/>
+      <Label Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="5" Text="{Binding AreaName}"/>
       
-      <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Sub Area" />
-      <Picker Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="4" x:Name="TypePicker" SelectedIndex="{Binding TypeIndex}"/>
-      <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="4" Text="{Binding TypeName}"/>
+      <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="Type" VerticalOptions="Center" FontSize="18" />
+      <Picker Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="5" x:Name="TypePicker" SelectedIndex="{Binding TypeIndex}"/>
+      <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="5" Text="{Binding TypeName}"/>
       
-      <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="Skill" />
-      <Picker Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="4" x:Name="SkillPicker" SelectedIndex="{Binding SkillIndex}"/>
-      <Label Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="4" Text="{Binding SkillName}"/>
+      <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="Skill" VerticalOptions="Center" FontSize="18" />
+      <Picker Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="5" x:Name="SkillPicker" SelectedIndex="{Binding SkillIndex}"/>
+      <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="5" Text="{Binding SkillName}"/>
       
-      <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Text="Skillname" />
+      <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Text="Skillname" FontSize="18" FontAttributes="Bold"/>
 
       <!--<Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="8" Text="{Binding }"/>-->
 
-      <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="Level" />
-
+      <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Text="Level" VerticalOptions="Center" FontSize="18" />
+      <Picker Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="5" x:Name="SkillLevelPicker" SelectedIndex="{Binding SkillLevelIndex}"/>
+      <Label Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="5" Text="{Binding SkillLevel}"/>
     </Grid>
 
   </ContentPage.Content>

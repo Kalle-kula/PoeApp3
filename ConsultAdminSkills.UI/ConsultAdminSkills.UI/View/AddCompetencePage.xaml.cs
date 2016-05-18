@@ -50,6 +50,11 @@ namespace ConsultAdminSkills.UI.View
                 TypePicker.Items.Add(typeName);
             }
 
+            foreach (var skillName in _employeeSkillViewModel.SkillNameList)
+            {
+                SkillPicker.Items.Add(skillName);
+            }
+
             AreaPicker.SelectedIndex = 0;
         }
 
@@ -69,6 +74,25 @@ namespace ConsultAdminSkills.UI.View
                 if (TypePicker.Items.Any())
                 {
                     TypePicker.SelectedIndex = 0;
+                    SetSkillPicker();
+                }
+            };
+        }
+
+        private void SetSkillPicker()
+        {
+            TypePicker.SelectedIndexChanged += (sender, args) =>
+            {
+                _employeeSkillViewModel.TypeIndexChanged(TypePicker.SelectedIndex);
+
+                SkillPicker.Items.Clear();
+                foreach (var skillName in _employeeSkillViewModel.SkillNameList)
+                {
+                    SkillPicker.Items.Add(skillName);
+                }
+                if (SkillPicker.Items.Any())
+                {
+                    SkillPicker.SelectedIndex = 0;
                 }
             };
         }
