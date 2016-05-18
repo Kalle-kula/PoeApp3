@@ -52,7 +52,9 @@
       <Picker Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="5" x:Name="SkillLevelPicker" SelectedIndex="{Binding SkillLevelIndex}"/>
       <Label Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="5" Text="{Binding SkillLevelList}" HorizontalOptions="Center"/>
 
-      <Button Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="3" Text="Save" Clicked="SaveButton_Clicked"/>
+      <Button Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="4" Text="Save" Clicked="SaveButton_Clicked"/>
+
+      <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="8" x:Name="SaveSuccessText"/>
     </Grid>
     </ScrollView>
   </ContentPage.Content>

@@ -16,172 +16,15 @@ namespace ConsultAdminSkills.ViewModel
 
         //private EmployeeSkillFake _employeeSkillFake;
         private SkillManager _skillManager;
+        private Skill _skill;
         public int AreaId { get; set; }
         public string Area { get; set; }
         public int SkillId { get; set; }
         private SkillTreeModel _skillTreeModel;
         private EmployeeSkill _employeeSkill;
+        private EmployeeSkillManager _employeeSkillManager;
         //int employeeId = 3; //fake för inloggad person
 
-        //AddCompetencePage
-
-        public List<string> AreaNameList { get; set; }
-        public List<string> TypeNameList { get; set; }
-        public List<string> SkillNameList { get; set; }
-        public async Task LoadSkills()
-        {
-            _skillManager = new SkillManager();
-            AllSkillsList = new List<Skill>();
-            AllSkillsList = await _skillManager.GetAllSkills();
-
-            AreaNameList = new List<string>();
-
-            if (AllSkillsList != null && AllSkillsList.Count > 0)
-            {
-                AreaNameList.AddRange(AllSkillsList.Select(x => x.AreaName).Distinct());
-                var areaList = AllSkillsList.FirstOrDefault();
-
-                List<string> TypeList = new List<string>();
-
-                if (areaList != null)
-                {
-                    foreach (var areaName in AllSkillsList)
-                    {
-                        if (areaName.AreaName == areaList.AreaName)
-                            TypeList.Add(areaName.AreaName); 
-                    } 
-                }
-                TypeList.AddRange(AllSkillsList.Where(x => x.AreaName == AllSkillsList.FirstOrDefault().AreaName).Select(x => x.TypeName)); 
-
-                var firstType = TypeList.FirstOrDefault();
-                var matchingTypes = AllSkillsList.Where(x => x.AreaName == firstType).ToList();
-                var type = matchingTypes.Select(x => x.TypeName).Distinct();
-
-                TypeNameList = new List<string>();
-                List<string> SkillList = new List<string>();
-
-                foreach (var typeName in type)
-                {
-                    TypeNameList.Add(typeName);
-                    SkillList.Add(typeName);
-                }
-
-                SkillList.AddRange(AllSkillsList.Where(x => x.TypeName == AllSkillsList.FirstOrDefault().TypeName).Select(x => x.TypeName));
-                var firstSkill = SkillList.FirstOrDefault();
-                var matchingSkills = AllSkillsList.Where(x => x.TypeName == firstSkill).ToList();
-                var skill = matchingSkills.Select(x => x.SkillName).Distinct();
-
-                SkillNameList = new List<string>();
-                foreach (var skillName in skill)
-                {
-                    SkillNameList.Add(skillName);
-                }
-            }
-        }
-
-        private int _areaIndex;
-        public int AreaIndex
-        {
-            get { return _areaIndex; }
-            set
-            {
-                if (_areaIndex != value)
-                    SetPropertyField(nameof(AreaIndex), ref _areaIndex, value);
-            }
-        }
-
-        private int _typeIndex;
-        public int TypeIndex
-        {
-            get { return _typeIndex; }
-            set
-            {
-                if (_typeIndex != value)
-                    SetPropertyField(nameof(TypeIndex), ref _typeIndex, value);
-            }
-        }
-
-        private int _skillIndex;
-        public int SkillIndex
-        {
-            get { return _skillIndex; }
-            set
-            {
-                if (_skillIndex != value)
-                SetPropertyField(nameof(SkillIndex), ref _skillIndex, value);
-                SkillIndexChanged(SkillIndex);
-            }
-        }
-
-        private string _description;
-        public string Description
-        {
-            get { return _description; }
-            set
-            {
-                if (_description != value)
-                    SetPropertyField(nameof(Description), ref _description, value);
-            }
-        }
-
-        private int _skillLevelIndex;
-        public int SkillLevelIndex
-        {
-            get { return _skillLevelIndex; }
-            set
-            {
-                if (_skillLevelIndex != value)
-                    SetPropertyField(nameof(SkillLevelIndex), ref _skillLevelIndex, value);
-            }
-        }
-
-        public void AreaIndexChanged(int index)
-        {
-            if (AllSkillsList.Count < index) return;
-            var selectedArea = AreaNameList[index];
-            var matchingArea = AllSkillsList.Where(x => x.AreaName == selectedArea).ToList();
-            var type = matchingArea.Select(x => x.TypeName).Distinct();
-            TypeNameList.Clear();
-
-            TypeNameList = new List<string>();
-
-            if (type == null) return;
-            {
-                foreach (var typeName in type)
-                {
-                    TypeNameList.Add(typeName);
-                }
-            }
-        }
-
-        public void TypeIndexChanged(int index)
-        {
-            if (TypeNameList.Count < index || index == -1) return;
-            var selectedType = TypeNameList[index];
-            var matchingType = AllSkillsList.Where(x => x.TypeName == selectedType).ToList();
-            var skill = matchingType.Select(x => x.SkillName).Distinct();
-
-            SkillNameList.Clear();
-
-            SkillNameList = new List<string>();
-
-            if (skill == null) return;
-            {
-                foreach (var skillName in skill)
-                {
-                    SkillNameList.Add(skillName);
-                }
-            }
-        }
-
-        public void SkillIndexChanged(int index)
-        {
-            if (SkillNameList.Count < index || index == -1) return;
-            var selectedSkill = SkillNameList[index];
-            var matchingSkill = AllSkillsList.FirstOrDefault(x => x.SkillName == selectedSkill);
-            var description = matchingSkill.Description.ToString();
-            Description = description;
-        }
 
         public void VerfifyUser(int employeeId)
         {
@@ -224,7 +67,7 @@ namespace ConsultAdminSkills.ViewModel
                             EmployeeTypes typeSkill = WrapToEmployeeTypes(innerSkill);
 
                             foreach (var finalSkill in EmployeeSkillsList.Where(x => x.AreaId == areaId && x.TypeId == typeId))
-                            {   
+                            {
                                 typeSkill.EmployeeSkills.Add(WrapToEmployeeSkill(finalSkill));
                             }
                             area.EmployeeTypes.Add(typeSkill);
@@ -294,7 +137,7 @@ namespace ConsultAdminSkills.ViewModel
                         TypeName = type.TypeName,
                         Description = type.TypeName,
                         IsType = true,
-                        
+
                     });
                     foreach (var skill in type.EmployeeSkills)
                     {
@@ -441,7 +284,198 @@ namespace ConsultAdminSkills.ViewModel
             }
         }
 
-        
+        //AddCompetencePage
 
+        public List<string> AreaNameList { get; set; }
+        public List<string> TypeNameList { get; set; }
+        public List<string> SkillNameList { get; set; }
+        public async Task LoadSkills()
+        {
+            _skillManager = new SkillManager();
+            AllSkillsList = new List<Skill>();
+            AllSkillsList = await _skillManager.GetAllSkills();
+
+            AreaNameList = new List<string>();
+
+            if (AllSkillsList != null && AllSkillsList.Count > 0)
+            {
+                AreaNameList.AddRange(AllSkillsList.Select(x => x.AreaName).Distinct());
+                var areaList = AllSkillsList.FirstOrDefault();
+
+                List<string> TypeList = new List<string>();
+
+                if (areaList != null)
+                {
+                    foreach (var areaName in AllSkillsList)
+                    {
+                        if (areaName.AreaName == areaList.AreaName)
+                            TypeList.Add(areaName.AreaName);
+                    }
+                }
+                TypeList.AddRange(AllSkillsList.Where(x => x.AreaName == AllSkillsList.FirstOrDefault().AreaName).Select(x => x.TypeName));
+
+                var firstType = TypeList.FirstOrDefault();
+                var matchingTypes = AllSkillsList.Where(x => x.AreaName == firstType).ToList();
+                var type = matchingTypes.Select(x => x.TypeName).Distinct();
+
+                TypeNameList = new List<string>();
+                List<string> SkillList = new List<string>();
+
+                foreach (var typeName in type)
+                {
+                    TypeNameList.Add(typeName);
+                    SkillList.Add(typeName);
+                }
+
+                SkillList.AddRange(AllSkillsList.Where(x => x.TypeName == AllSkillsList.FirstOrDefault().TypeName).Select(x => x.TypeName));
+                var firstSkill = SkillList.FirstOrDefault();
+                var matchingSkills = AllSkillsList.Where(x => x.TypeName == firstSkill).ToList();
+                var skill = matchingSkills.Select(x => x.SkillName).Distinct();
+
+                SkillNameList = new List<string>();
+                foreach (var skillName in skill)
+                {
+                    SkillNameList.Add(skillName);
+                }
+            }
+        }
+
+        private int _areaIndex;
+        public int AreaIndex
+        {
+            get { return _areaIndex; }
+            set
+            {
+                if (_areaIndex != value)
+                    SetPropertyField(nameof(AreaIndex), ref _areaIndex, value);
+            }
+        }
+
+        private int _typeIndex;
+        public int TypeIndex
+        {
+            get { return _typeIndex; }
+            set
+            {
+                if (_typeIndex != value)
+                    SetPropertyField(nameof(TypeIndex), ref _typeIndex, value);
+            }
+        }
+
+        private int _skillIndex;
+        public int SkillIndex
+        {
+            get { return _skillIndex; }
+            set
+            {
+                if (_skillIndex != value)
+                    SetPropertyField(nameof(SkillIndex), ref _skillIndex, value);
+                SkillIndexChanged(SkillIndex);
+            }
+        }
+
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                if (_description != value)
+                    SetPropertyField(nameof(Description), ref _description, value);
+            }
+        }
+
+        private int _skillLevelIndex;
+        public int SkillLevelIndex
+        {
+            get { return _skillLevelIndex; }
+            set
+            {
+                if (_skillLevelIndex != value)
+                    SetPropertyField(nameof(SkillLevelIndex), ref _skillLevelIndex, value);
+            }
+        }
+
+
+        public void AreaIndexChanged(int index)
+        {
+            if (AllSkillsList.Count < index) return;
+            var selectedArea = AreaNameList[index];
+            var matchingArea = AllSkillsList.Where(x => x.AreaName == selectedArea).ToList();
+            var type = matchingArea.Select(x => x.TypeName).Distinct();
+            TypeNameList.Clear();
+
+            TypeNameList = new List<string>();
+
+            if (type == null) return;
+            {
+                foreach (var typeName in type)
+                {
+                    TypeNameList.Add(typeName);
+                }
+            }
+        }
+
+        public void TypeIndexChanged(int index)
+        {
+            if (TypeNameList.Count < index || index == -1) return;
+            var selectedType = TypeNameList[index];
+            var matchingType = AllSkillsList.Where(x => x.TypeName == selectedType).ToList();
+            var skill = matchingType.Select(x => x.SkillName).Distinct();
+
+            SkillNameList.Clear();
+
+            SkillNameList = new List<string>();
+
+            if (skill == null) return;
+            {
+                foreach (var skillName in skill)
+                {
+                    SkillNameList.Add(skillName);
+                }
+            }
+        }
+
+        public void SkillIndexChanged(int index)
+        {
+            if (SkillNameList.Count < index || index == -1) return;
+            var selectedSkill = SkillNameList[index];
+            var matchingSkill = AllSkillsList.FirstOrDefault(x => x.SkillName == selectedSkill);
+            var description = matchingSkill.Description.ToString();
+            Description = description;
+        }
+
+        public void SkillLevelIndexChanged(int index)
+        {
+
+        }
+
+        public void SaveAndEditCompetence()
+        {
+            var selectedSkill = SkillNameList[SkillIndex];
+            var matchingSkill = AllSkillsList.FirstOrDefault(x => x.SkillName == selectedSkill);
+
+            _employeeSkill = new EmployeeSkill()
+            {
+                EmployeeId = 92,//CurrentUser.EmployeeId,
+                EmployeeFullName = "Kalle Hallert", //CurrentUser.FullName,
+                SkillId = matchingSkill.SkillId,
+                SkillName = matchingSkill.SkillName,
+                TypeId = matchingSkill.TypeId,
+                TypeName = matchingSkill.TypeName,
+                AreaId = matchingSkill.AreaId,
+                AreaName = matchingSkill.AreaName,
+                Level = SkillLevelIndex,
+                Comment = string.Empty,
+                LastUpdate = DateTime.Now
+            };
+
+        }
+
+        public async Task AddCompetence()
+        {
+            SaveAndEditCompetence();
+            await _employeeSkillManager.SaveSkill(_employeeSkill);
+        }
     }
 }

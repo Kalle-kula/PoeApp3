@@ -19,11 +19,11 @@ namespace ConsultAdminSkills.UI.View
         //int id
         {
             InitializeComponent();
-            EmployeeId = 3;
+            EmployeeId = 92;
             _employeeSkillViewModel = new EmployeeSkillViewModel();
             CreateAreaNameList();
 
-            
+
             BindingContext = _employeeSkillViewModel;
 
         }
@@ -100,25 +100,40 @@ namespace ConsultAdminSkills.UI.View
                 }
             };
         }
-        
+
         private void SetSkillLeverPicker()
         {
-            for (int i = 0; i < 11; i++)
-            {
-                SkillLevelList.Add(i);
-            }
-            foreach (var skillLevel in SkillLevelList)
-            {
-                SkillLevelPicker.Items.Add(skillLevel.ToString());
-            }
-            if (SkillLevelPicker.Items.Any())
-            {
-                SkillLevelPicker.SelectedIndex = 0;
-            }
+            //SkillLevelPicker.SelectedIndexChanged += (sender, args) =>
+            //{
+                //_employeeSkillViewModel.SkillLevelIndex(SkillLevelPicker.SelectedIndex);
+
+                for (int i = 0; i < 11; i++)
+                {
+                    SkillLevelList.Add(i);
+                }
+                foreach (var skillLevel in SkillLevelList)
+                {
+                    SkillLevelPicker.Items.Add(skillLevel.ToString());
+                }
+                if (SkillLevelPicker.Items.Any())
+                {
+                    SkillLevelPicker.SelectedIndex = 0;
+                }
+           // };
         }
-        private void SaveButton_Clicked(object sender, EventArgs e)
+        private async void SaveButton_Clicked(object sender, EventArgs e)
         {
-            
+            try
+            {
+                await _employeeSkillViewModel.AddCompetence();
+                SaveSuccessText.Text = "Competence have been saved";
+
+            }
+            catch (Exception)
+            {
+
+                SaveSuccessText.Text = "Something went wrong..";
+            }
         }
     }
 }
