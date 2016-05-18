@@ -76,7 +76,6 @@ namespace ConsultAdminSkills.ViewModel
                 {
                     SkillNameList.Add(skillName);
                 }
-
             }
         }
 
@@ -109,7 +108,30 @@ namespace ConsultAdminSkills.ViewModel
             set
             {
                 if (_skillIndex != value)
-                    SetPropertyField(nameof(SkillIndex), ref _skillIndex, value);
+                SetPropertyField(nameof(SkillIndex), ref _skillIndex, value);
+                SkillIndexChanged(SkillIndex);
+            }
+        }
+
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                if (_description != value)
+                    SetPropertyField(nameof(Description), ref _description, value);
+            }
+        }
+
+        private int _skillLevelIndex;
+        public int SkillLevelIndex
+        {
+            get { return _skillLevelIndex; }
+            set
+            {
+                if (_skillLevelIndex != value)
+                    SetPropertyField(nameof(SkillLevelIndex), ref _skillLevelIndex, value);
             }
         }
 
@@ -134,11 +156,12 @@ namespace ConsultAdminSkills.ViewModel
 
         public void TypeIndexChanged(int index)
         {
-            if (AllSkillsList.Count < index) return;
+            if (TypeNameList.Count < index || index == -1) return;
             var selectedType = TypeNameList[index];
             var matchingType = AllSkillsList.Where(x => x.TypeName == selectedType).ToList();
             var skill = matchingType.Select(x => x.SkillName).Distinct();
-            TypeNameList.Clear();
+
+            SkillNameList.Clear();
 
             SkillNameList = new List<string>();
 
@@ -149,6 +172,15 @@ namespace ConsultAdminSkills.ViewModel
                     SkillNameList.Add(skillName);
                 }
             }
+        }
+
+        public void SkillIndexChanged(int index)
+        {
+            if (SkillNameList.Count < index || index == -1) return;
+            var selectedSkill = SkillNameList[index];
+            var matchingSkill = AllSkillsList.FirstOrDefault(x => x.SkillName == selectedSkill);
+            var description = matchingSkill.Description.ToString();
+            Description = description;
         }
 
         public void VerfifyUser(int employeeId)

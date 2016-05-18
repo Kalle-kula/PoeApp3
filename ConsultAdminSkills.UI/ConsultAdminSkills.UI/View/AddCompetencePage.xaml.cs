@@ -29,6 +29,8 @@ namespace ConsultAdminSkills.UI.View
         {
             base.OnAppearing();
             SetAreaPicker();
+            SetSkillPicker();
+
             //await SetAreaPicker();
             //_employeeSkillViewModel = new EmployeeSkillViewModel();
             //await _employeeSkillViewModel.SetEmployeeSkillLists(EmployeeId);
@@ -74,7 +76,6 @@ namespace ConsultAdminSkills.UI.View
                 if (TypePicker.Items.Any())
                 {
                     TypePicker.SelectedIndex = 0;
-                    SetSkillPicker();
                 }
             };
         }
