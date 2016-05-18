@@ -13,6 +13,8 @@ namespace ConsultAdminSkills.UI.View
     {
         private EmployeeSkillViewModel _employeeSkillViewModel;
         private int EmployeeId;
+        private List<int> SkillLevelList = new List<int>();
+
         public AddCompetencePage()
         //int id
         {
@@ -30,6 +32,7 @@ namespace ConsultAdminSkills.UI.View
             base.OnAppearing();
             SetAreaPicker();
             SetSkillPicker();
+            SetSkillLeverPicker();
 
             //await SetAreaPicker();
             //_employeeSkillViewModel = new EmployeeSkillViewModel();
@@ -96,6 +99,26 @@ namespace ConsultAdminSkills.UI.View
                     SkillPicker.SelectedIndex = 0;
                 }
             };
+        }
+        
+        private void SetSkillLeverPicker()
+        {
+            for (int i = 0; i < 11; i++)
+            {
+                SkillLevelList.Add(i);
+            }
+            foreach (var skillLevel in SkillLevelList)
+            {
+                SkillLevelPicker.Items.Add(skillLevel.ToString());
+            }
+            if (SkillLevelPicker.Items.Any())
+            {
+                SkillLevelPicker.SelectedIndex = 0;
+            }
+        }
+        private void SaveButton_Clicked(object sender, EventArgs e)
+        {
+            
         }
     }
 }
