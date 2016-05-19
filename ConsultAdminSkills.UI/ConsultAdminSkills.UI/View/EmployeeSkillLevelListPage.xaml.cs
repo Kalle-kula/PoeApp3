@@ -13,7 +13,7 @@ namespace ConsultAdminSkills.UI.View
     public partial class EmployeeSkillLevelListPage : ContentPage
     {
         private EmployeeCompetenceViewModel _employeeCompetenceViewModel;
-        private int skillId;
+        private int _skillId;
 
         public EmployeeSkillLevelListPage(int skillId)
         {
@@ -21,13 +21,32 @@ namespace ConsultAdminSkills.UI.View
             _employeeCompetenceViewModel = new EmployeeCompetenceViewModel();
             BindingContext = _employeeCompetenceViewModel;
 
-            this.skillId = skillId;
+            this._skillId = skillId;
 
         }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await _employeeCompetenceViewModel.SetSkillDescription(skillId);
+            await _employeeCompetenceViewModel.SetSkillDescription(_skillId);
         }
+
+        //private async void AddTapped(object sender, EventArgs e)
+        //{
+        //    var eventArgsConvert = (TappedEventArgs)e;
+        //    var addSkillClicked = eventArgsConvert.Parameter;
+        //}
+
+        //private async void EditTapped(object sender, EventArgs e)
+        //{
+        //    var eventArgsConvert = (TappedEventArgs)e;
+        //    var dateClicked = eventArgsConvert.Parameter;
+        //}
+
+        //private async void DeleteTapped(object sender, EventArgs e)
+        //{
+        //    var eventArgsConvert = (TappedEventArgs)e;
+        //    var dateClicked = eventArgsConvert.Parameter;
+        //}
+
     }
 }

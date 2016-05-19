@@ -52,6 +52,19 @@ namespace ConsultAdminSkills.ViewModel
             }
         }
 
+        private bool _isSameUser;
+        public bool IsSameUser
+        {
+            get { return _isSameUser; }
+            set
+            {
+                if (_isSameUser != value)
+                {
+                    SetPropertyField(nameof(IsSameUser), ref _isSameUser, value);
+                }
+            }
+        }
+
         public async Task SetSkillDescription(int skillId)
         {
             _skillManager = new SkillManager();
@@ -64,20 +77,21 @@ namespace ConsultAdminSkills.ViewModel
 
         public async Task SetSkillList(int skillId)
         {
-            _skillManager = new SkillManager();
-            Skill skill = await _skillManager.GetSkill(skillId);
-            if (skill == null) return;
+            //_skillManager = new SkillManager();
+            //Skill skill = await _skillManager.GetSkill(skillId);
+            //if (skill == null) return;
 
-            //SkillLevelList, göra platt lista av skill.SkillEmployees
-            SkillEmployees = new List<EmployeeSkill>();
-            foreach (var skillList in skill.SkillEmployees)
-            {
-                SkillEmployees.Add(new EmployeeSkill()
-                {
-                    EmployeeFullName = skillList.EmployeeFullName,
-                    Level = skillList.Level
-                });
-            }
+            ////SkillLevelList, göra platt lista av skill.SkillEmployees
+            //SkillEmployees = new List<EmployeeSkill>();
+            //foreach (var skillList in skill.SkillEmployees)
+            //{
+            //    SkillEmployees.Add(new EmployeeSkill()
+            //    {
+            //        EmployeeFullName = skillList.EmployeeFullName,
+            //        Level = skillList.Level
+            //    });
+            //}
+
             //SkillTreeList = new List<SkillTreeModel>();
             //if (AllSkills == null) return;
             //foreach (var area in AllSkills)

@@ -43,6 +43,24 @@
 
                 <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="6" Text="{Binding EmployeeFullName}" FontSize="15"/>
 
+                <!--<Image Grid.Row="0" Grid.Column="3" Source="@drawable/ic_add_white_18dp.png" WidthRequest="30" HeightRequest="30" IsVisible="{Binding IsSameUser}">
+                  <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="AddTapped" CommandParameter="{Binding .}"/>
+                  </Image.GestureRecognizers>
+                </Image>
+                
+                <Image Grid.Row="0" Grid.Column="4" Source="@drawable/ic_edit_white_18dp.png" WidthRequest="30" HeightRequest="30" IsVisible="{Binding IsSameUser}">
+                  <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="EditTapped" CommandParameter="{Binding .}"/>
+                  </Image.GestureRecognizers>
+                </Image>
+                
+                <Image Grid.Row="0" Grid.Column="5" Source="@drawable/ic_delete_white_18dp.png" WidthRequest="30" HeightRequest="30" IsVisible="{Binding IsSameUser}">
+                  <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="DeleteTapped" CommandParameter="{Binding .}"/>
+                  </Image.GestureRecognizers>
+                </Image>-->
+                
                 <Label Grid.Row="0" Grid.Column="7" Text="{Binding Level}" FontSize="15"/>
 
               </Grid>

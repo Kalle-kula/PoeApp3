@@ -16,6 +16,8 @@
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
 
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
@@ -31,15 +33,15 @@
       </Grid.ColumnDefinitions>
 
       <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Area" VerticalOptions="Center" FontSize="18"/>
-      <Picker Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="5" x:Name="AreaPicker" SelectedIndex="{Binding AreaIndex}"/>
+      <Picker Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="5" x:Name="AreaPicker" SelectedIndex="{Binding AreaIndex}" IsEnabled="{Binding PickerEnabled}"/>
       <Label Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="5" Text="{Binding AreaName}"/>
       
       <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="Type" VerticalOptions="Center" FontSize="18" />
-      <Picker Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="5" x:Name="TypePicker" SelectedIndex="{Binding TypeIndex}"/>
+      <Picker Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="5" x:Name="TypePicker" SelectedIndex="{Binding TypeIndex}" IsEnabled="{Binding PickerEnabled}"/>
       <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="5" Text="{Binding TypeName}"/>
       
       <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="Skill" VerticalOptions="Center" FontSize="18" />
-      <Picker Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="5" x:Name="SkillPicker" SelectedIndex="{Binding SkillIndex}"/>
+      <Picker Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="5" x:Name="SkillPicker" SelectedIndex="{Binding SkillIndex}" IsEnabled="{Binding PickerEnabled}"/>
       <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="5" Text="{Binding SkillName}"/>
       
       <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Text="Skillname" FontSize="18" FontAttributes="Bold"/>
@@ -52,9 +54,12 @@
       <Picker Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="5" x:Name="SkillLevelPicker" SelectedIndex="{Binding SkillLevelIndex}"/>
       <Label Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="5" Text="{Binding SkillLevelList}" HorizontalOptions="Center"/>
 
-      <Button Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="4" Text="Save" Clicked="SaveButton_Clicked"/>
+      <Button Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="4" Text="Save" Clicked="SaveButton_Clicked" IsVisible="{Binding SaveButtonEnable}"/>
 
-      <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="8" x:Name="SaveSuccessText" HorizontalOptions="Center"/>
+      <Button Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="4" Text="Delete" Clicked="DeleteButton_Clicked" IsVisible="{Binding DeleteButtonEnable}"/>
+
+
+      <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="8" x:Name="StatusText" HorizontalOptions="Center"/>
     </Grid>
     </ScrollView>
   </ContentPage.Content>

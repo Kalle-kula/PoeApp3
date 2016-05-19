@@ -40,6 +40,9 @@
     <Compile Include="View\AddCompetencePage.xaml.cs">
       <DependentUpon>AddCompetencePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditCompetencePage.xaml.cs">
+      <DependentUpon>EditCompetencePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EmployeeGeneralPage.xaml.cs">
       <DependentUpon>EmployeeGeneralPage.xaml</DependentUpon>
     </Compile>
@@ -220,6 +223,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\AddCompetencePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\EditCompetencePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

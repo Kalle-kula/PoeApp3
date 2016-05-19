@@ -15,12 +15,18 @@ namespace ConsultAdminSkills.UI.View
         private int EmployeeId;
         private List<int> SkillLevelList = new List<int>();
 
-        public AddCompetencePage(int id)
+        public AddCompetencePage(int id, bool pickerEnabled, bool saveButtonEnabled)
         //int id
         {
             InitializeComponent();
             EmployeeId = id;
             _employeeSkillViewModel = new EmployeeSkillViewModel();
+            _employeeSkillViewModel.PickerEnabled = pickerEnabled;
+            _employeeSkillViewModel.SaveButtonEnable = saveButtonEnabled;
+            if (!saveButtonEnabled)
+            {
+                _employeeSkillViewModel.DeleteButtonEnable = true;
+            }
             CreateAreaNameList();
             BindingContext = _employeeSkillViewModel;
 
@@ -31,12 +37,6 @@ namespace ConsultAdminSkills.UI.View
             SetAreaPicker();
             SetSkillPicker();
             SetSkillLeverPicker();
-
-            //await SetAreaPicker();
-            //_employeeSkillViewModel = new EmployeeSkillViewModel();
-            //await _employeeSkillViewModel.SetEmployeeSkillLists(EmployeeId);
-            //    //_employeeSkillViewModel.VerfifyUser(employeeId);
-            //    //await _employeeSkillViewModel.SetEmployeeSkillLists(employeeId);
         }
 
         private async void CreateAreaNameList()
@@ -124,13 +124,23 @@ namespace ConsultAdminSkills.UI.View
             try
             {
                 await _employeeSkillViewModel.AddCompetence();
-                SaveSuccessText.Text = "Competence has been saved";
-
+                StatusText.Text = "Competence has been saved";
             }
             catch (Exception)
             {
-
-                SaveSuccessText.Text = "Something went wrong..";
+                StatusText.Text = "Something went wrong..";
+            }
+        }
+        private async void DeleteButton_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await _employeeSkillViewModel.AddCompetence();
+                StatusText.Text = "Competence has been deleted";
+            }
+            catch (Exception)
+            {
+                StatusText.Text = "Something went wrong..";
             }
         }
     }

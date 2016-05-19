@@ -185,7 +185,6 @@ namespace ConsultAdminSkills.ViewModel
                     skill.IsVisible = isVisible;
                 }
             }
-
         }
 
         public void ClickTypeEvent(int id)
@@ -293,6 +292,7 @@ namespace ConsultAdminSkills.ViewModel
         public List<string> AreaNameList { get; set; }
         public List<string> TypeNameList { get; set; }
         public List<string> SkillNameList { get; set; }
+
         public async Task LoadSkills()
         {
             _skillManager = new SkillManager();
@@ -454,7 +454,7 @@ namespace ConsultAdminSkills.ViewModel
 
         }
 
-        public async void SaveAndEditCompetence()
+        public void SaveAndEditCompetence()
         {
             var selectedSkill = SkillNameList[SkillIndex];
             var matchingSkill = AllSkillsList.FirstOrDefault(x => x.SkillName == selectedSkill);
@@ -480,7 +480,54 @@ namespace ConsultAdminSkills.ViewModel
             SaveAndEditCompetence();
             _employeeSkillManager = new EmployeeSkillManager();
             await _employeeSkillManager.SaveSkill(_employeeSkill);
+        }
 
+        public async Task DeleteCompetence()
+        {
+            var selectedSkill = SkillNameList[SkillIndex];
+            var matchingSkill = AllSkillsList.FirstOrDefault(x => x.SkillName == selectedSkill);
+            _employeeSkill = new EmployeeSkill()
+            {
+                EmployeeId = CurrentUser.EmployeeId,
+                SkillId = matchingSkill.SkillId
+            };
+            _employeeSkillManager = new EmployeeSkillManager();
+            await _employeeSkillManager.DeleteSkill(_employeeSkill);
+        }
+
+        private bool _pickerEnabled;
+        public bool PickerEnabled
+        {
+            get { return _pickerEnabled; }
+            set
+            {
+                if (_pickerEnabled != value)
+                    SetPropertyField(nameof(PickerEnabled), ref _pickerEnabled, value);
+            }
+        }
+
+        private bool _saveButtonEnabled;
+        public bool SaveButtonEnable
+        {
+            get { return _saveButtonEnabled; }
+            set
+            {
+                if (_saveButtonEnabled != value)
+                    SetPropertyField(nameof(SaveButtonEnable), ref _saveButtonEnabled, value);
+            }
+        }
+
+        
+
+        private bool _deleteButtonEnabled;
+        public bool DeleteButtonEnable
+        {
+            get { return _deleteButtonEnabled; }
+            set
+            {
+                if (_deleteButtonEnabled != value)
+                    SetPropertyField(nameof(DeleteButtonEnable), ref _deleteButtonEnabled, value);
+            }
         }
     }
 }

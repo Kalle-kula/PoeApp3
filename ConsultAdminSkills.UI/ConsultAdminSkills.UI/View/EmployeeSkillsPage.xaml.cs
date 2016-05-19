@@ -39,17 +39,23 @@ namespace ConsultAdminSkills.UI.View
 
         private void ToolbarItem_Edit(object sender, EventArgs e)
         {
-            //Device.BeginInvokeOnMainThread(() => Navigation.PushAsync(new EmployeeGeneralEditPage(_Navigation)));
+            bool pickerEnabled = false;
+            bool saveButtonEnabled = true;
+            Device.BeginInvokeOnMainThread(() => Navigation.PushAsync(new AddCompetencePage(employeeId, pickerEnabled, saveButtonEnabled)));
         }
 
         private void ToolbarItem_Add(object sender, EventArgs e)
         {
-            Device.BeginInvokeOnMainThread(() => Navigation.PushAsync(new AddCompetencePage(employeeId)));
+            bool pickerEnabled = true;
+            bool saveButtonEnabled = true;
+            Device.BeginInvokeOnMainThread(() => Navigation.PushAsync(new AddCompetencePage(employeeId, pickerEnabled, saveButtonEnabled)));
         }
 
         private void ToolbarItem_Delete(object sender, EventArgs e)
         {
-            //Device.BeginInvokeOnMainThread(() => Navigation.PushAsync(new EmployeeGeneralEditPage(_Navigation)));
+            bool pickerEnabled = false;
+            bool saveButtonEnabled = false;
+            Device.BeginInvokeOnMainThread(() => Navigation.PushAsync(new AddCompetencePage(employeeId, pickerEnabled, saveButtonEnabled)));
         }
         private void AreaImgDownTapped(object sender, EventArgs e)
         {

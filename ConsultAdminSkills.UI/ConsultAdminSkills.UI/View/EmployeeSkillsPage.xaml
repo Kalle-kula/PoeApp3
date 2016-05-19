@@ -5,17 +5,20 @@
              x:Class="ConsultAdminSkills.UI.View.EmployeeSkillsPage">
 
   <ContentPage.ToolbarItems IsVisible="{Binding IsSameUser}">
-    <ToolbarItem Clicked="ToolbarItem_Edit" Order="Primary" Priority="0">
+    <!--<ToolbarItem Order="Primary" Priority="1" Text="{Binding }">
+      
+    </ToolbarItem>-->
+    <ToolbarItem Clicked="ToolbarItem_Edit" Order="Primary" Priority="2">
       <ToolbarItem.Icon>
         <OnPlatform x:TypeArguments="FileImageSource" Android="ic_edit_white_18dp.png"/>
       </ToolbarItem.Icon>
     </ToolbarItem>
-  <ToolbarItem Clicked="ToolbarItem_Add" Order="Primary" Priority="1">
+  <ToolbarItem Clicked="ToolbarItem_Add" Order="Primary" Priority="3">
       <ToolbarItem.Icon>
         <OnPlatform x:TypeArguments="FileImageSource" Android="ic_add_white_18dp.png" />
       </ToolbarItem.Icon>
     </ToolbarItem>
-  <ToolbarItem Clicked="ToolbarItem_Delete" Order="Primary" Priority="2">
+  <ToolbarItem Clicked="ToolbarItem_Delete" Order="Primary" Priority="4">
       <ToolbarItem.Icon>
         <OnPlatform x:TypeArguments="FileImageSource" Android="ic_delete_white_18dp.png" />
       </ToolbarItem.Icon>

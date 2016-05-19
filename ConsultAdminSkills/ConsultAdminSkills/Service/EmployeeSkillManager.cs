@@ -33,5 +33,24 @@ namespace ConsultAdminSkills.Service
 
             return;
         }
+
+        public async Task DeleteSkill(EmployeeSkill employeeSkill)
+        {
+            string uri = $"http://consultadminwebserver.azurewebsites.net/api/employee/{employeeSkill.EmployeeId}/skills?id={employeeSkill.SkillId}";
+
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            try
+            {
+                var requestJSON = JsonConvert.SerializeObject(employeeSkill);
+                await httpClient.DeleteAsync(uri);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return;
+        }
     }
 }
